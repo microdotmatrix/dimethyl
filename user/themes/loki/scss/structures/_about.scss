@@ -1,0 +1,152 @@
+#about-hero {
+   position: relative;
+   min-height: 640px;
+   > img {
+      width: 100%;
+      object-fit: cover;
+      filter: blur(3px) contrast(150%);
+      z-index: 1;
+      @include animate(aboutHeroImgFX, 4s, 0.3s);
+   }
+   > article {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+      position: relative;
+      > .__title {
+         position: relative;
+         z-index: 1;
+         margin-left: $spacing-unit;
+         > h2 {
+            font-weight: 400;
+            color: palette($cool-sky, sh09);
+         }
+      }
+      > .__subtitle {
+         align-self: flex-end;
+         position: relative;
+         z-index: 1;
+         margin-right: $spacing-unit * 2;
+         > h5 {
+            color: ocCyan(5);
+            font-family: $kanit;
+            font-weight: 500;
+         }
+      }
+      > .__content {
+         align-self: center;
+         margin-bottom: 3.3rem;
+         width: 80%;
+         position: relative;
+         z-index: 1;
+         > p {
+            color: $gray-300;
+            font-weight: 300;
+         }
+      }
+      > .__img {
+         position: absolute;
+         top: -10%;
+         left: 45%;
+         width: 280px;
+         aspect-ratio: 1/1.1618;
+         z-index: 0;
+         border-radius: var(--radius-blob-1);
+         box-shadow: 0 0 33px -3px ocPink(5);
+         overflow: hidden;
+         > img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+         }
+      }
+   }
+}
+
+#about {
+   @include row();
+   > aside {
+      @include col(5);
+      position: relative;
+      > h2 {
+         margin-top: 3rem;
+      }
+      > .__about-img {
+         position: absolute;
+         left: 0;
+         top: 30%;
+         z-index: 1;
+         width: 250px;
+         height: 250px;
+         max-height: 250px;
+         background-image: linear-gradient(to bottom, $gray-600 0%, $text-color 100%) !important;
+         border: 12px solid $grey2;
+         box-shadow: 0px 8px 16px -4px rgba(0, 0, 0, 0.2), 
+                     0px 4px 8px -4px rgba(0, 0, 0, 0.3);
+         transition: all 400ms $ease-in-expo;
+         img {
+            object-fit: cover;
+            filter: contrast(100%) grayscale(50%);
+            transition: all 400ms $ease-in-cubic;
+         }
+         &:hover {
+            box-shadow: 0px 8px 16px -4px rgba($grey2, 0.75), 
+                        0px 4px 8px -4px rgba($blue2, 0.6);
+            img {
+               filter: contrast(120%) grayscale(0);
+               opacity: 0.66;
+            }
+         }
+      }
+      > .__about-img--2 {
+         position: absolute;
+         right: 0;
+         top: 50%;
+         z-index: 2;
+         width: 300px;
+         height: 300px;
+         background-image: linear-gradient(to bottom, $gray-600 0%, $text-color 100%) !important;
+         border: 12px solid $grey1;
+         box-shadow: 0px 8px 16px -4px rgba(0, 0, 0, 0.2), 
+                     0px 4px 8px -4px rgba(0, 0, 0, 0.3);
+         transition: all 400ms $ease-in-expo;
+         img {
+            object-fit: cover;
+            filter: contrast(100%) grayscale(50%);
+            transition: all 400ms $ease-in-cubic;
+         }
+         &:hover {
+            box-shadow: 0px 8px 16px -4px rgba($grey2, 0.75), 
+                        0px 4px 8px -4px rgba($blue2, 0.6);
+            img {
+               filter: contrast(120%) grayscale(0);
+               opacity: 0.66;
+            }
+         }
+      }
+      .jarallax {
+         .jarallax-img {
+            --hero-img-opacity: 1;
+         }
+      }
+   }
+   > article {
+      @include col(7);
+      padding-left: 2rem;
+      > h5 {
+         margin-top: 0;
+      }
+      > .__social-media {
+         @include flexbox($wrap: nowrap, $justify: center, $align: center, $gap: 1rem);
+         margin: 2rem auto;
+         > .__social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: $fontSize-h4;
+         }
+      }
+   }
+}

@@ -1,0 +1,82 @@
+{% extends 'partials/base.html.twig' %}
+
+{% set collection = page.collection() %}
+{% set show_breadcrumbs = header_var('show_breadcrumbs', [page, events])|defined(true) %}
+{% set show_pagination = header_var('show_pagination', [page, events])|defined(true) %}
+{% set show_sidebar = header_var('show_sidebar', [page, events])|defined(true)  %}
+{% set hero_image = page.media.images|first %}
+
+{% block content %}
+   <header id="event-hero" class="hero parallax-container">
+      <div class="_img parallax">
+         {{ hero_image.html()|raw }}
+      </div>
+      <div class="_content">
+         <h2>Upcoming Events...</h2>
+         <article>
+            {% for p in page.find('/articles/events').children.order('date', 'desc').slice(0, 1) %}
+            <div class="__meta">
+               <span class="posted-on">
+                  <i class="fa fa-calendar-day"></i>
+                  <time datetime='{{ p.date|date("c") }}'>
+                     {{ p.date|date("M d Y") }}
+                  </time>
+               </span>
+            </div>
+            <div class="__title">
+               <h2><a href="{{ p.url }}">{{ p.title }}</a></h2>
+            </div>
+            <div class="__details">
+               <address>
+                  <a href="{{ p.header.event.location_url }}" class="__venue">{{ p.header.event.venue }}</a>
+                  <span class="__event--date"><i class="fa fa-clock"></i> {{ p.header.event.start }}</span>
+                  <span class="__event--location"><i class="fa fa-location-pin"></i> {{ p.header.event.location }}</span>
+               </address>
+            </div>
+            {% endfor %}
+         </article>
+         <div class="__map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m27!1m12!1m3!1d52329.35667789831!2d-95.50769132993162!3d29.717905913020502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m12!3e6!4m5!1s0x8640c427326bbc63%3A0xd2a96d0589089226!2s1506%20Early%20Ln%2C%20Houston%2C%20TX%2077055!3m2!1d29.7974535!2d-95.47950329999999!4m4!1s0x8640c31159687519%3A0x683d35a7adacf632!3m2!1d29.736826399999998!2d-95.5346206!5e0!3m2!1sen!2sus!4v1643161502418!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+         </div>
+      </div>
+   </header>
+
+   {% if show_breadcrumbs and config.plugins.breadcrumbs.enabled %}
+      <section id="breadcrumbs">
+         {% include 'blog/breadcrumbs.html.twig' %}
+      </section>
+   {% endif %}
+
+   <main id="events">
+      {{ page.content|raw }}
+
+      <div class="events-listing">
+         {% if collection|length != 0 %}
+            {% for event in collection %}
+               {% include 'partials/event_item.html.twig' with { 'page': event, 'truncate': true, 'single': false } %}
+            {% endfor %}
+         {% else %}
+            <h3>{{ "PLUGIN_EVENTS.EVENTS.NO_EVENTS_TITLE"|t }}</h3>
+            <p>{{ ("PLUGIN_EVENTS.EVENTS.NO_EVENTS_CONTENT"|t(uri.param('category')))|markdown }}</p>
+         {% endif %}
+      </div>
+      {#{% include 'partials/events_sidebar.html.twig' with { 'page': page.parent } %}#}
+
+      {# Render the pagination list #}
+      {% if show_pagination and config.plugins.pagination.enabled and collection.params.pagination %}
+         <div id="listing-footer">
+            {% include 'partials/pagination.html.twig' with { base_url: page.url, pagination: collection.params.pagination } %}
+         </div>
+      {% endif %}
+   </main>
+
+{% endblock %}
+
+{% block bottom %}
+   {{ parent() }}
+   <script>
+      $(document).ready(function(){
+         $('.parallax').parallax();
+      });
+   </script>
+{% endblock %}

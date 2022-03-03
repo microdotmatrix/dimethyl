@@ -1,0 +1,48 @@
+title: Portfolio
+
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        portfolio:
+          type: tab
+          title: Portfolio Config
+
+          fields:
+
+            portfolio_options:
+              type: section
+              title: Portfolio Options
+              underline: true
+
+            header.gallery:
+              type: pagemedia
+              label: 'Add Images'
+
+            header.row_height:
+              type: text
+              label: Row Height
+              default: 420
+              validate:
+                type: int
+            
+            header.spacing:
+              type: text
+              label: Item Spacing
+              default: 0
+              validate:
+                type: int
+
+            header.captions:
+              type: toggle
+              label: Image Captions
+              highlight: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool

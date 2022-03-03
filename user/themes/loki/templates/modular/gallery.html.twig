@@ -1,0 +1,19 @@
+{% for img in page.header.gallery | split(',') %}
+{% set meta = page.media[img].meta %}
+   <article class="img-wrapper grid-item {{ page.header.gallery_id }}" data-category="{{ page.header.gallery_id }}">
+      <a rel="lightbox" href="{{ page.media[img].url }}" class="glightbox gsapBox"
+         {% if meta.title is defined %}data-title="{{ meta.title }}"{% endif %}
+         {% if meta.caption is defined %} data-description="{{ meta.caption }}"{% endif %}
+      data-desc-position="right"
+      data-gallery="{{ page.header.gallery_id }}">
+         <figure class="_img">
+            <img src="{{ page.media[img].url }}" alt="{{ meta.alt|e }}">
+            {% if meta.caption is defined %}
+               <figcaption class="caption">
+                  {{ meta.caption|e }}
+               </figcaption>
+            {% endif %}
+         </figure>
+      </a>
+   </article>
+{% endfor %}

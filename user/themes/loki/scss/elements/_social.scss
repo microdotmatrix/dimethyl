@@ -1,0 +1,19 @@
+@each $color, $url in $social-urls {
+   a[href*="#{$url}"] {
+      color: #{$color};
+      transition: all 0.33s ease;
+      &:hover {
+         filter: brightness(1.5);
+      }
+   }
+}
+
+// @each $color, $url in $slayley-urls {
+//   a[href="#{$url}"] {
+//      color: #{$color};
+//      transition: all 0.33s ease;
+//      &:hover {
+//         filter: brightness(1.5);
+//      }
+//   }
+//}

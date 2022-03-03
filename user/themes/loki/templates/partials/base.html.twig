@@ -1,0 +1,83 @@
+{% set theme_config = attribute(config.themes, config.system.pages.theme) %}
+
+<!DOCTYPE html>
+<html lang="{{ (grav.language.getActive ?: grav.config.site.default_lang)|e }}">
+<head>
+{% block head %}
+    <meta charset="utf-8" />
+    <title>{% if header.title %}{{ header.title|e }} | {% endif %}{{ site.title|e }}</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include 'partials/meta.html.twig' %}
+
+    <link rel="icon" type="image/png" href="{{ url('theme://images/logo.png')|e }}" />
+    <link rel="canonical" href="{{ page.canonical(true)|e }}" />
+{% endblock head %}
+
+{% block stylesheets %}
+   {% do assets.addCss('theme://css/all.min.css', 100) %}
+   {% do assets.addCss('theme://css/loki.css', 99) %}
+{% endblock %}
+
+{% block javascripts %}
+   {% do assets.addJs('jquery', {priority: 101, group: 'bottom'}) %}
+   {% do assets.addJs('gsap', {priority: 100, group: 'bottom'}) %}
+   {% do assets.addJs('lightbox', {priority: 98, group: 'bottom'}) %}
+   {% do assets.addJs('jarallax', {priority: 98, group: 'bottom'}) %}
+
+   {% if page.template() == 'portfolio' %}
+      {% do assets.addJs('isotope', {priority: 99, group: 'bottom'}) %}
+   {% endif %}
+   {% if page.template() == 'contact' %}
+      {% do assets.addJs('powermode', {priority: 50, group: 'bottom'}) %}
+   {% endif %}
+   
+   {% do assets.addJs('theme://js/main.js', {group: 'bottom'}) %}
+   <script>
+      document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");
+   </script>
+{% endblock %}
+
+{% block assets deferred %}
+    {{ assets.css()|raw }}
+    {{ assets.js()|raw }}
+{% endblock %}
+
+</head>
+<body id="top" class="{{ page.header.body_classes|e }}">
+
+   {% block header %}
+      <section id="page-header" class="nav intro--fx">
+         {% include "partials/header.html.twig" %}
+      </section>
+   {% endblock %}
+
+   {% block body %}
+      <section id="page-content" class="intro--fx">  
+         {% block content %}{% endblock %}
+      </section>
+   {% endblock %}
+
+   {% block footer %}
+      <div id="svg-accent" class="intro--fx">
+         <svg class="svg-snoweb svg-theme-light" height="100" preserveaspectratio="none" viewbox="0 0 1920 169.18" width="100%" x="0" xmlns="http://www.w3.org/2000/svg" y="0">
+            <polygon class="svg-fill-primary" points="0 0 105.82 125.19 339.25 9.5 960 118.43 1471.1 23.18 1920 169.18 0 169.18 0 0">
+            </polygon>
+            <polygon class="svg-fill-primary" points="0 0 105.82 125.19 196.51 22.22 960 118.43 1791.91 39.08 1920 169.18 0 169.18 0 0">
+            </polygon>
+            <polygon class="svg-fill-primary" points="0 0 105.82 125.19 440.79 0 960 118.43 1445.72 54.14 1920 169.18 0 169.18 0 0">
+            </polygon>
+         </svg>
+      </div>
+      <section id="page-footer" class="intro--fx">
+         {% include "partials/footer.html.twig" %}
+      </section>
+   {% endblock %}
+
+   {% block bottom %}
+      {{ assets.js('bottom')|raw }}
+   {% endblock %}
+
+</body>
+</html>

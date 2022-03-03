@@ -1,0 +1,94 @@
+h1 {
+   font-size: $h1-font-size;
+}
+
+h2 {
+   font-size: $h2-font-size;
+}
+
+h3 {
+   font-size: $h3-font-size;
+}
+
+h4 {
+   font-size: $h4-font-size;
+}
+
+h5 {
+   font-size: $h5-font-size;
+}
+
+h6 {
+   font-size: $h6-font-size;
+}
+
+h1, h2, h3, h4, h5, h6 {
+   font-family: $blinker;
+   font-weight: 400;
+   line-height: 1.25;
+   @include lhCrop(1.618);
+}
+
+p {
+   margin-top: 0.8rem;
+   margin-bottom: 1rem;
+   font-size: $p-font-size;
+   @include lhCrop(1.618);
+}
+
+blockquote {
+   font-style: italic;
+   color: lighten($gray-900, 40%);
+}
+
+strong {
+   font-weight: 400;
+}
+
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+.text-justify { text-align: justify; }
+
+.float-left { float: left; }
+.float-right { float: right; }
+
+.clear {
+   @include clearfix();
+}
+
+
+// Grav CMS Markdown Notice Plugin CSS
+.notices {
+   padding: 1px 1px 1px 10px;
+   margin: 10px 0;
+   p {
+      padding: 0;
+      margin: 0.5rem;
+      font-weight: 300;
+   }
+   &::before {
+      content: "\f071";
+      font-family: $icons;
+      font-size: 1.5rem;
+      float: left;
+      margin-left: -10px;
+      margin-right: 20px;
+      filter: contrast(150%) grayscale(50%);
+   }
+   &.yellow {
+      color: #df8a13;
+   }
+   &.red {
+      color: lighten(#b52b27, 10%);
+   }
+   &.blue {
+      color: #28a1c5;
+   }
+   &.green {
+      color: #3d8b3d;
+   }
+   &.purple {
+      color: $purple;
+   }
+}

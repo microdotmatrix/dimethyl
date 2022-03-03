@@ -1,0 +1,58 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block javascripts %}
+   {{ parent() }}
+   {% do assets.addJs('theme://js/plugins/global.js', {'priority':92, 'group':'bottom'}) %}
+   {% do assets.addJs('theme://js/plugins/parallax.js', {'priority':90, 'group':'bottom'}) %}
+   <script>
+      $(document).ready(function(){
+         $('.parallax').parallax();
+      });
+   </script>
+{% endblock %}
+
+{% set hero_image = page.media.images|first %}
+
+{% block content %}
+
+   <section class="hero">
+      {% include "blog/event-hero.html.twig" %}
+	</section>
+
+   <main id="articles">
+      <header>
+         {% include "blog/author.html.twig" %}
+      </header>
+
+      <article>
+         <span class="location">Location:</span> <h2>{{ page.header.event_location }}</h2>
+         <span class="date">Date:</span> <h4>{{ page.header.event_date }}</h4>
+         {{ page.header.event_flyer.html()|raw }}
+         {{ page.content | raw }}
+      </article>
+
+      <footer class="post-footer">
+         <div class="_share">
+            {% include "partials/sharing.html.twig" %}
+         </div>
+         {#% include "partials/posts/taxonomy.html.twig" %#}
+
+         <h6>Taxonomy</h6>
+         {% if grav.theme.config.post.taxonomy is defined %}
+            {% if grav.theme.config.post.taxonomy %}
+               {% include "blog/taxonomy.html.twig" %}
+            {% endif %}
+         {% endif %}
+
+         {# Show navigation if enabled, defaults to true #}
+         {% if grav.theme.config.post.navigation is defined %}
+            {% if grav.theme.config.post.navigation %}
+               {% include 'blog/pagination.html.twig' %}
+            {% endif %}
+         {% else %}
+            <p><small>You've reached the end...</small></p>
+         {% endif %}
+      </footer>
+   </main>
+
+{% endblock %}

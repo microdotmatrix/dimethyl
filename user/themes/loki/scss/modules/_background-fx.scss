@@ -1,0 +1,44 @@
+.blobFX {
+   background-color: #100010;
+   overflow: hidden;
+}
+
+.blobFX::before, 
+.blobFX::after,
+.blobFX-bg::before, 
+.blobFX-bg::after {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 3em;
+   height: 3em;
+   content: '.:.';
+   font-size: 200px;
+   mix-blend-mode: exclusion;
+   filter: blur(8px);
+   animation: 44s -27s moveDots infinite ease-in-out alternate;
+}
+
+.blobFX-bg::before {
+   @include dots(10);
+   animation-duration: 90s;
+   animation-delay: -27s;
+}
+
+.blobFX-bg::after {
+   @include dots(20);
+   animation-duration: 80s;
+   animation-delay: -32s;
+}
+
+.blobFX::before {
+   @include dots(10);
+   animation-duration: 90s;
+   animation-delay: -23s;
+}
+
+.blobFX::after {
+   @include dots(30);
+   animation-duration: 41s;
+   animation-delay: -19s;
+}

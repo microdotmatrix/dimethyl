@@ -1,0 +1,85 @@
+{% set slide_1 = page.find('/_img').media['1.jpg'] %}
+{% set slide_2 = page.find('/_img').media['2.jpg'] %}
+{% set slide_3 = page.find('/_img').media['3.jpg'] %}
+{% set slide_4 = page.find('/_img').media['4.jpg'] %}
+{% set slide_5 = page.find('/_img').media['5.jpg'] %}
+
+<div class="slides slides--contained effect-2">
+   {% for p in page.find('/articles/events').children.order('date', 'desc').slice(0, 1) %}
+      {% set post_img = p.media.images|first %}
+      <div class="slide slide--current">
+         <div id="gsap--slideImgIntro" class="slide__img glitch" style="background-image: url('{% if post_img %}{{ post_img.url }}{% else %}{{ slide_3.url }}{% endif %}');"></div>
+         <div class="slide__text">
+            <a href="{{ p.url }}" class="slide__title">{{ p.title }}</a>
+            <div class="slide__description slide__event">
+               <div class="__location"> 
+                  <i class="svg __location-dot--red"></i> <a href="{{ p.header.event.venue_link }}">{{ p.header.event.venue }}</a> 
+               </div>
+               <div class="__date">
+                  <i class="svg __calendar"></i> <span>{{ p.header.event.start }}</span>
+               </div>
+               {{ p.content|truncate(190)|raw }}
+               <div id="more">
+                  <a href="{{ p.url }}" class="__details">More Details</a>
+               </div>
+            </div>
+         </div>
+      </div>
+   {% endfor %}
+
+   {% for p in page.find('/articles/news').children.order('date', 'desc').slice(0, 1) %}
+      {% set post_img = p.media.images|first %}
+      <div class="slide">
+         <div class="slide__img glitch" style="background-image: url('{% if post_img %}{{ post_img.url }}{% else %}{{ slide_5.url }}{% endif %}');"></div>
+         <div class="slide__text">
+            <a href="{{ p.url }}" class="slide__title">{{ p.title }}</a>
+            <div class="slide__description">
+               {{ p.summary|raw }}
+            </div>
+            <div id="more">
+               <a href="{{ p.url }}" class="__details">Read More</a>
+            </div>
+         </div>
+      </div>
+   {% endfor %}
+      
+   <div class="slide">
+      <div class="slide__img glitch" style="background-image: url('{{ slide_3.url }}');"></div>
+      <div class="slide__text">
+         <a href="{{ site_url|e }}/portfolio" class="slide__title">Art & Designs</a>
+         <div class="slide__description">
+            <p>Check out some of my latest artwork and designs on the <a href="{{ site_url|e }}/portfolio">portfolio</a> page.</p>
+         </div>
+         <div id="drawing" class="img-preview">
+            {% include "modular/preview.html.twig" with {'art': page.find('/portfolio/_drawings')} %}
+         </div>
+         <div id="painting" class="img-preview">
+            {% include "modular/preview.html.twig" with {'art': page.find('/portfolio/_paintings')} %}
+         </div>
+         <div id="digital" class="img-preview">
+            {% include "modular/preview.html.twig" with {'art': page.find('/portfolio/_digital')} %}
+         </div>
+         <div id="uv" class="img-preview">
+            {% include "modular/preview.html.twig" with {'art': page.find('/portfolio/_uv')} %}
+         </div>
+      </div>
+   </div>
+   <div class="slide">
+      <div class="slide__img glitch" style="background-image: url('{{ slide_4.url }}');"></div>
+      <div class="slide__text">
+         <h2 class="slide__title">Fine Quest</h2>
+         <p class="slide__description">You have nothing, nothing to threaten me with. Nothing to do with all your strength.</p>
+      </div>
+   </div>
+   <div class="slide">
+      <div class="slide__img glitch" style="background-image: url('{{ slide_5.url }}');"></div>
+      <div class="slide__text">
+         <h2 class="slide__title">Dome Being</h2>
+         <p class="slide__description">I'll be standing where l belong. Between you and the people of Gotham.</p>
+      </div>
+   </div>
+</div>
+<nav class="slide-nav">
+   <button class="slide-nav__button prev"><span class="slide-nav__text prev">Previous</span></button>
+   <button class="slide-nav__button next"><span class="slide-nav__text next">Next</span></button>
+</nav>

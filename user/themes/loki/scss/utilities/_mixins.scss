@@ -1,0 +1,445 @@
+// Reset Heading Tag Styles
+
+@mixin reset-headings($font-size: $fontSize-p, $margin-top: 0.8rem) {
+   h1, h2, h3, h4, h5, h6 {
+      font-size: $font-size;
+      font-weight: 400;
+      margin-top: $margin-top;
+      display: inline-block;
+   }
+}
+
+// Center Content using Margin: auto L+R
+
+@mixin center-margin {
+   margin-left: auto;
+   margin-right: auto;
+}
+
+// Button Style Mixins
+
+@mixin btn-minimal($font-size: 1rem) {
+   padding: 0.5rem 1rem;
+   border: 1px solid rgba($gray-400, 0.6);
+   border-radius: 1.5rem;
+   font-size: $font-size;
+   transition: all 400ms ease;
+   &:hover {
+      border: 1px solid rgba($gray-600, 0.8);
+      box-shadow: 0 0 8px 0 rgba($pc2, 0.3);
+   }
+}
+
+// Blurred Color Blob Background Effect Mixin
+
+@mixin dots($count) {
+   $text-shadow: ();
+   @for $i from 0 through $count {
+      $text-shadow: $text-shadow,
+      (-.2+(random()) * 3) + em
+      (-.8+(random()) * 3) + em
+      14px
+      hsla(random() * 270, 100%, 50%,.9);
+   }
+   text-shadow: $text-shadow;
+}
+
+@mixin blobFX_before-after {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 3em;
+   height: 3em;
+   content: '.:.';
+   font-size: 200px;
+   mix-blend-mode: exclusion;
+   filter: blur(8px);
+   animation: 44s -27s moveDots infinite ease-in-out alternate;
+}
+
+// Shared between modals and offcanvases
+@mixin overlay-backdrop($position: fixed, $zindex: 0, $backdrop-bg: #000, $backdrop-opacity: 0.6) {
+   position: $position;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   z-index: $zindex;
+   width: 100vw;
+   height: 100vh;
+   background-color: $backdrop-bg;
+   opacity: $backdrop-opacity;
+   
+   // Fade for backdrop
+   &.fade { opacity: 0; }
+   &.show { opacity: 1; }
+}
+
+
+// Animation Shorthand Mixin
+
+@mixin animate($name: fadeIn, $duration: 1s, $delay: 0s) {
+   animation-name: $name;
+   animation-duration: $duration;
+   animation-delay: $delay;
+   animation-fill-mode: both;
+}
+
+// Fade-out gradient line/rule mixin (as ::after pseudo element)
+
+@mixin fadeLine($width: 100%, $height: 1px, $dark: $gray-700, $light: $gray-300, $top: 0, $left: 0) {
+   &::after {
+      content: "";
+      @include gradient-x($dark, rgba($light, 0), 10%, 100%);
+      width: $width;
+      height: $height;
+      display: block;
+      border-radius: 0px;
+      position: relative;
+      top: $top;
+      left: $left;
+   }
+}
+
+// Color Mixins
+
+// Color Variant Mixins stolen from Spectre...
+// Component focus shadow
+@mixin control-shadow($color: $primary-color) {
+   box-shadow: 0 0 0 .1rem rgba($color, .2);
+}
+
+// Shadow mixin
+@mixin shadow-variant($offset) {
+   box-shadow: 0 $offset ($offset + .05rem) * 2 rgba($gray-900, .3);
+}
+
+// Background color utility mixin
+@mixin bg-color-variant($name: ".bg-primary", $color: $primary-color) {
+   #{$name} {
+      background: $color !important;
+      
+      @if (lightness($color) < 60) {
+         color: $light-color;
+      }
+   }
+}
+
+// Text color utility mixin
+@mixin text-color-variant($name: ".text-primary", $color: $primary-color) {
+   #{$name} {
+      color: $color;
+   }
+   
+   a#{$name} {
+      &:focus,
+      &:hover {
+         color: lighten($color, 30%);
+      }
+      &:visited {
+         color: darken($color, 5%);
+      }
+   }
+}
+
+// Fluid Type Functions stolen from Spectre...
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+   $u1: unit($min-vw);
+   $u2: unit($max-vw);
+   $u3: unit($min-font-size);
+   $u4: unit($max-font-size);
+   
+   @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+      & {
+         font-size: $min-font-size;
+         @media screen and (min-width: $min-vw) {
+            font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+         }
+         @media screen and (min-width: $max-vw) {
+            font-size: $max-font-size;
+         }
+      }
+   }
+}
+
+
+// 22. Flow Text
+// ==========================================================================
+
+$range : $lg - $sm !default;
+$intervals: 12 !default;
+$interval-size: $range / $intervals !default;
+
+@mixin flow-text{
+   $i: 0;
+   @while $i <= $intervals {
+      @media only screen and (min-width : 360 + ($i * $interval-size)) {
+         font-size: 1rem * (1 + (.02 * $i));
+      }
+      $i: $i + 1;
+   }
+   
+   // Handle below 360px screen
+   @media only screen and (max-width: 360px) {
+      font-size: 1rem;
+   }
+}
+
+@use 'sass:math';
+
+// --------------------------------
+
+// Typography
+
+// --------------------------------
+
+// edit font rendering -> tip: use for light text on dark backgrounds
+@mixin fontSmooth {
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
+
+// crop top space on text elements - caused by line height
+@mixin lhCrop($line-height, $capital-letter: 1) {
+   &::before {
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+      margin-top: calc((#{$capital-letter} - #{$line-height}) * 0.5em);
+   }
+}
+
+// edit text unit on a component level
+@mixin textUnit($text-unit) {
+   //--text-unit: #{$text-unit};
+   //font-size: var(--text-unit);
+   font-size: #{$text-unit};
+}
+
+// --------------------------------
+
+// Spacing
+
+// --------------------------------
+
+// edit space unit on a component level
+@mixin spaceUnit($space-unit) {
+   --space-unit:  #{$space-unit};
+}
+
+// --------------------------------
+
+// Reset
+
+// --------------------------------
+
+// reset user agent style
+@mixin reset {
+   background-color: transparent;
+   padding: 0;
+   border: 0;
+   border-radius: 0;
+   color: inherit;
+   line-height: inherit;
+   appearance: none;
+}
+
+// --------------------------------
+
+// Colors
+
+// --------------------------------
+
+// define HSL color variable
+@mixin defineColorHSL($color, $hue, $saturation, $lightness) {
+   #{$color}: unquote("hsl(#{$hue}, #{$saturation}, #{$lightness})");#{$color}-h: #{$hue};#{$color}-s: #{$saturation};#{$color}-l: #{$lightness};
+}
+
+@mixin img-overlay($opacity: 1, $bg: rgba(0, 0, 0, 0.8)) {
+   content: "";
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   z-index: 0;
+   opacity: $opacity;
+   width: 100%;
+   height: 100%;
+   background-color: $bg;
+}
+
+// Misc: Hamburger Icon Mixin 1
+
+@mixin hamburger($dimensions: 24px, $speed: 86ms, $easing: ease-out) {
+   cursor: pointer;
+   display: block;
+   height: $dimensions;
+   position: relative;
+   width: $dimensions;
+   
+   span {
+      background-color: $burger-color;
+      display: block;
+      height: 1px;
+      left: calc(50% - 8px);
+      position: absolute;
+      transform-origin: center;
+      transition-duration: $speed;
+      transition-property: background-color, opacity, transform;
+      transition-timing-function: $easing;
+      width: 16px;
+      
+      &:nth-child(1) {
+         top: calc(50% - 6px);
+      }
+      
+      &:nth-child(2) {
+         top: calc(50% - 1px);
+      }
+      
+      &:nth-child(3) {
+         top: calc(50% + 4px);
+      }
+   }
+   
+   &:hover {
+      background-color: darken($burger-color, 5%);
+   }
+   
+   // Modifers
+   &.is-active {
+      span {
+         &:nth-child(1) {
+            transform: translateY(5px) rotate(45deg);
+         }
+         
+         &:nth-child(2) {
+            opacity: 0;
+         }
+         
+         &:nth-child(3) {
+            transform: translateY(-5px) rotate(-45deg);
+         }
+      }
+   }
+}
+
+// Generate `:hover` and `:focus` styles in one go.
+//
+// @link    https://github.com/inuitcss/inuitcss/blob/master/tools/_tools.mixins.scss
+// @content Wrapped in `:focus` and `:hover` pseudo-classes.
+// @output  Wraps the given content in `:focus` and `:hover` pseudo-classes.
+//
+@mixin hocus {
+   &:focus,
+   &:hover {
+       @content;
+   }
+}
+
+// Hide the current element from all.
+//
+// The element will be hidden from screen readers and removed from the document flow.
+//
+// @link   http://juicystudio.com/article/screen-readers-display-none.php
+// @param  {Boolean} $important [true] - Whether the visibility is important.
+// @output `display`, `visibility`
+//
+@mixin hidden($important: true) {
+   $important: important($important);
+   display: none   $important;
+   visibility: hidden $important;
+}
+
+//
+// Show the current element for all.
+//
+// The element will be accessible from screen readers and visible in the document flow.
+//
+// @param  {String}  $display   [block] - The rendering box used for the element.
+// @param  {Boolean} $important [true]  - Whether the visibility is important.
+// @output `display`, `visibility`
+//
+@mixin shown($display: block, $important: true) {
+   $important: important($important);
+   display: $display $important;
+   visibility: visible  $important;
+}
+
+// Font-Size Mixin stolen from Inuit CSS...
+
+// Generates a rem font-size (with pixel fallback) and a baseline-compatible
+// unitless line-height from a pixel font-size value. Basic usage is simply:
+//
+//   @include inuit-font-size(18px);
+//
+// You can force a specific line-height by passing it as the second argument:
+//
+//   @include inuit-font-size(16px, 1);
+//
+// You can also modify the line-height by increments, while staying in the
+// baseline grid, by setting the `$modifier` parameter. It takes a positive
+// or negative integer, and it will add or remove "lines" to the  generated
+// line-height. This is the recomended way to do it, unless you really need
+// an absolute value. i.e.:
+//
+//   // add 2 lines:
+//   @include inuit-font-size(24px, $modifier: +2);
+//
+//   // subtract 1 line:
+//   @include inuit-font-size(24px, $modifier: -1);
+
+$inuit-global-baseline:     6px !default;
+$inuit-global-font-size:    16px !default;
+$inuit-global-spacing-unit-factor:        4 !default;   // 24px
+$inuit-global-spacing-unit:       $inuit-global-baseline * $inuit-global-spacing-unit-factor !default;
+$inuit-global-line-height:  $inuit-global-spacing-unit !default;
+
+@mixin font-size($font-size, $line-height: auto, $modifier: 0, $important: false) {
+   
+   @if (type-of($font-size) == number) {
+      @if (unit($font-size) != "px") {
+         @error "`#{$font-size}` needs to be a pixel value.";
+      }
+   } @else {
+      @error "`#{$font-size}` needs to be a number.";
+   }
+   
+   @if ($important == true) {
+      $important: !important;
+   } @else if ($important == false) {
+      $important: null;
+   } @else {
+      @error "`#{$important}` needs to be `true` or `false`.";
+   }
+   
+   // We provide a `px` fallback for old IEs not supporting `rem` values.
+   font-size: $font-size $important;
+   font-size: ($font-size / $inuit-global-font-size) * 1rem $important;
+   
+   @if ($line-height == "auto") {
+      
+      // Define how many grid lines each text line should span.
+      // By default, we set it to the minimum number of lines necessary
+      // in order to contain the defined font-size, +1 for some breathing room.
+      // This can be modified with the `$modifier` parameter.
+      $lines: ceil($font-size / $inuit-global-baseline) + $modifier + 1;
+      $line-height: $lines * $inuit-global-baseline;
+      
+      line-height: ($line-height / $font-size) $important;
+   }
+   
+   @else {
+      
+      @if (type-of($line-height) == number or $line-height == "inherit" or $line-height == "normal") {
+         line-height: $line-height $important;
+      }
+      
+      @else if ($line-height != 'none' and $line-height != false) {
+         @error "D’oh! `#{$line-height}` is not a valid value for `$line-height`.";
+      }
+   }
+}

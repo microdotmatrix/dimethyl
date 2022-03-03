@@ -1,0 +1,46 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\there\.node\corepack\yarn\1.22.15\bin\yarn.js add @barba/core
+
+PATH: 
+  C:\Python310\Scripts\;C:\Python310\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\wamp64\bin\php\php7.4.26;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Git\cmd;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Ruby30-x64\bin;C:\Users\there\AppData\Local\Microsoft\WindowsApps;C:\Users\there\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\there\AppData\Roaming\npm;C:\wamp64\bin\php\php7.4.26;C:\Users\there\AppData\Roaming\Composer\vendor\bin;C:\Program Files (x86)\GitHub CLI\
+
+Yarn version: 
+  1.22.15
+
+Node version: 
+  16.13.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'C:\wamp64\www\dmt\user\themes\loki\node_modules\node-sass\vendor\win32-x64-93\binding.node'
+
+npm manifest: 
+  {
+     "name": "Loki",
+     "version": "1.2.0",
+     "description": "The **Loki** Theme is for [Grav CMS](http://github.com/getgrav/grav).",
+     "devDependencies": {
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "^8.0.0",
+        "gulp-clean-css": "^3.10.0",
+        "gulp-csscomb": "^3.1.0",
+        "gulp-rename": "^1.4.0",
+        "gulp-sass": "^5.0.0",
+        "gulp-uglify": "^3.0.2",
+        "node-sass": "^6.0.1"
+     },
+     "dependencies": {
+        "@barba/core": "^2.9.7",
+        "glightbox": "^3.1.0",
+        "nanogallery2": "^3.0.5",
+        "rellax": "^1.12.1"
+     }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

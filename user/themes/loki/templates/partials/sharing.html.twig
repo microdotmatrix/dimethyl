@@ -1,0 +1,20 @@
+<a href="http://www.facebook.com/share.php?u={{ page.url(true) }}" class="share-me btn bg-facebook" target="_blank">
+   {#<img src="{{ theme_url }}/images/facebook.png" alt="facebook-share" width="112" height="112">#}
+   <i class="fab fa-facebook-f"></i>
+</a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{ page.url(true) }}&amp;title={{ page.title|replace({' ': "%20"}) }}" class="share-me btn bg-linkedin" target="_blank">
+   {#<img src="{{ theme_url }}/images/linkedin.png" alt="linked-share" width="112" height="112">#}
+   <i class="fab fa-linkedin-in"></i>
+</a>
+<a href="http://www.tumblr.com/share/link?url={{ page.url(true) }}&amp;name={{ page.title|replace({' ': "%20"}) }}" class="share-me btn bg-tumblr" target="_blank">
+   {#<img src="{{ theme_url }}/images/tumblr.png" alt="tumblr-share" width="112" height="112">#}
+   <i class="fab fa-tumblr"></i>
+</a>
+<a href="http://reddit.com/submit?url={{ page.url(true) }}&amp;title={{ page.title|replace({' ': "%20"}) }}" class="share-me btn bg-reddit" target="_blank">
+   {#<img src="{{ theme_url }}/images/reddit.png" alt="reddit-share" width="112" height="112">#}
+   <i class="fab fa-reddit-alien"></i>
+</a>
+<a href="http://twitter.com/home?status={{ page.title|replace({' ': "%20"}) }}-{{ page.url(true) }}" class="share-me btn bg-twitter" target="_blank">
+   {#<img src="{{ theme_url }}/images/twitter.png" alt="twitter-share" width="112" height="112">#}
+   <i class="fab fa-twitter"></i>
+</a>

@@ -1,0 +1,16 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+
+   <header class="hero blobFX">
+      <div class="blobFX-bg"></div>
+   </header>
+
+   <main id="modular">
+      {% set collection = page.collection() %}
+      {% for module in collection %}
+         {{ module.content|raw }}
+      {% endfor %}
+   </main>
+
+{% endblock %}

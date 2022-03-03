@@ -1,0 +1,76 @@
+title: text
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        inhalt:
+          type: tab
+          title: 'Content'
+          fields:
+            header.title:
+              type: text
+              autofocus: true
+              label: 'Title'
+            content:
+              type: section
+              title: 'Content'
+              underline: true
+              fields:
+                header.image:
+                  type: file
+                  label: 'Header Image'
+                  destination: '@self'
+                  accept:
+                    - image/*
+                header.description:
+                  type: textarea
+                  rows: 2
+                  label: 'Description'
+                header.scale:
+                  type: select
+                  label: 'Scale'
+                  default: 1
+                  size: medium
+                  options:
+                    1: '4:3'
+                    2: '16:9'
+                    3: '1:1'
+            settings:
+              type: section
+              title: 'Settings'
+              underline: true
+              fields:
+                columns:
+                  type: columns
+                  fields:
+                    column1:
+                      type: column
+                      fields:
+                        header.column:
+                          type: select
+                          label: 'Columns'
+                          default: asc
+                          options:
+                            1: 'One Column'
+                            2: 'Two Columns'
+                        header.icon:
+                          type: text
+                          label: 'Icon'
+                          markdown: true
+                          description: 'Select an Icon'
+                          placeholder: 'address-book'
+                        header.showtitle:
+                          type: select
+                          label: 'Show Title'
+                          highlight: 1
+                          default: 1
+                          options:
+                            0: 'No'
+                            1: 'Yes'
+                            2: 'idfk'
+                    column2:
+                      type: column
+                      fields:

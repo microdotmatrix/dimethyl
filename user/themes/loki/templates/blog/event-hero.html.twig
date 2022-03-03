@@ -1,0 +1,59 @@
+{% set hero_image = page.media.images|first %}
+<!--<header id="event-hero">-->
+   <div class="_img blobFX-bg">
+      <img src="{{ hero_image.url }}" alt="{{ page.title }}" class="jarallax-img" loading="lazy">
+   </div>
+   <div class="_content">
+      <h2 class="__next">Next Up!</h2>
+      <article>
+         <div class="__meta">
+            <i class="fa fa-calendar-day"></i>
+            <time datetime='{{ event.header.event.start|dateTranslate(config.plugins.events.event_item.date) }}'>
+               <span class="__month-day">{{ page.header.event.start|dateTranslate('M j')|raw }}</span> <span class="__year">{{ page.header.event.start|dateTranslate('Y')|raw }}</span>
+            </time>
+         </div>
+         <div class="__title">
+            <h1>{{ page.title }}</h1>
+         </div>
+         <div class="__details">
+            <address>
+               <span class="__event-map-pin">
+                  <a href="#">
+                     <svg class="svg-snoweb svg-theme-dark" height="100" preserveaspectratio="xMidYMid meet" viewbox="0 0 100 100" width="100" x="0" xmlns="http://www.w3.org/2000/svg" y="0">
+                        <path class="svg-fill-primary" d="M28.1,21.7A31,31,0,0,1,71.9,65.5L50,87.4,28.1,65.5A31,31,0,0,1,28.1,21.7ZM50,52.4a8.9,8.9,0,1,0-8.9-8.8A8.8,8.8,0,0,0,50,52.4Z" fill-rule="evenodd">
+                        </path>
+                     </svg>
+                  </a> 
+               </span>
+               <div class="__event--location">
+                  <span class="__event--venue"><a href="{{ page.header.event.location_url }}" target="_blank">{{ page.header.event.venue }}</a></span>
+                  <div class="__event--address">{{ page.header.event.address|raw }}</div>
+                  <div class="__event--address">{{ page.header.event.city|raw }}, {{ page.header.event.state|raw }}  {{ page.header.event.zip|raw }}</div>
+               </div>
+            </address>
+            <div class="__extras">
+               <div class="__event--time">
+                  Starts @: <span class="__start">{{ page.header.event.start|date('g:ia') }}</span> 
+                  {% if page.header.event.end %}
+                     ...until <span class="__end">{{ page.header.event.end|date('g:ia') }}</span>
+                  {% endif %}
+               </div>
+               {% if page.header.event.facebook_link %}
+                  <div class="__event--links">
+                     <a href="{{ page.header.event.facebook_link }}" target="_blank" class="__event--facebook">
+                        <svg class="svg-snoweb svg-theme-dark" height="100" preserveaspectratio="xMidYMid meet" viewbox="0 0 100 100" width="100" x="0" xmlns="http://www.w3.org/2000/svg" y="0">
+                           <path class="svg-fill-primary" d="M100,50.3A50,50,0,1,0,42.19,100V64.85H29.49V50.3h12.7V39.22c0-12.61,7.46-19.57,18.88-19.57a76.81,76.81,0,0,1,11.2,1V33H66c-6.21,0-8.15,3.87-8.15,7.85V50.3H71.68L69.46,64.85H57.81V100A50.23,50.23,0,0,0,100,50.3Z">
+                           </path>
+                        </svg> 
+                     </a>
+                     <div><< Check out the Facebook <a href="{{ page.header.event.facebook_link }}">Event</a> page...</div>
+                  </div>
+               {% endif %}
+            </div>
+         </div>
+      </article>
+      <div class="__map">
+         <iframe src="https://www.google.com/maps/embed?pb=!1m27!1m12!1m3!1d52329.35667789831!2d-95.50769132993162!3d29.717905913020502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m12!3e6!4m5!1s0x8640c427326bbc63%3A0xd2a96d0589089226!2s1506%20Early%20Ln%2C%20Houston%2C%20TX%2077055!3m2!1d29.7974535!2d-95.47950329999999!4m4!1s0x8640c31159687519%3A0x683d35a7adacf632!3m2!1d29.736826399999998!2d-95.5346206!5e0!3m2!1sen!2sus!4v1643161502418!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+   </div>
+<!--</header>-->

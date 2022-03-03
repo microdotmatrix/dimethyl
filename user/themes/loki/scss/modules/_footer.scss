@@ -1,0 +1,44 @@
+#svg-accent {
+   width: 100%;
+   height: 60px;
+   background: $content-bg-color;
+   svg {
+      width: 100%;
+      height: 100%;
+      fill: $footer-bg-color;
+      stroke-width: 0;
+      background: $content-bg-color;
+   }
+}
+
+#footer {
+   margin-top: 1rem;
+   @include row();
+   > section {
+      @include col();
+      padding-top: 1.5rem;
+      &.__nav {
+         @include flexbox($justify: center, $align: center, $basis: auto);
+         > nav {
+            @include flexbox($gap: 2rem);
+            > a {
+               font-size: 1.2rem;
+            }
+         }
+      }
+      &.__social-media {
+         @include flexbox($align: center, $basis: auto);
+         > .__social-links {
+            @include flexbox($justify: flex-end, $gap: 1rem);
+            a {
+               font-size: $fontSize-h5;
+            }
+         }
+      }
+   }
+   > #colophon {
+      @include row();
+      justify-content: center;
+      margin-bottom: 3rem;
+   }
+}

@@ -1,0 +1,26 @@
+title: Product
+extends@: default
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        content:
+          fields:
+
+            product_information:
+              type: spacer
+              title: 'Product information'
+              
+            header.id:
+              type: text
+              style: vertical
+              label: 'ID or SKU'
+            header.price:
+              type: text
+              autofocus: true
+              style: vertical
+              label: 'Price'
+

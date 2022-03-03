@@ -1,0 +1,184 @@
+button {
+   background: unset;
+   color: unset;
+   border: unset;
+   font-size: unset;
+   padding: unset;
+   margin: unset;
+}
+
+#portfolio-hero {
+   display: flex;
+   align-items: flex-end;
+   position: relative;
+   overflow: hidden;
+   z-index: 1;
+   section {
+      @include row();
+      max-width: 1680px;
+      color: $gray-700;
+      z-index: 1;
+      @include for-mobile() {
+         flex-direction: row;
+         align-items: center;
+         width: fit-content;
+      }
+      > .__drawings,
+      > .__paintings,
+      > .__uv-reactive,
+      > .__digital {
+         @include col();
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         position: relative;
+         z-index: 1;
+         @include for-mobile() {
+            flex-basis: 50%;
+         }
+         .__category {
+            font-family: $blinker;
+            // font-size: $h2-font-size;
+            font-weight: 400;
+            color: $gray-700;
+            transition: all 400ms ease;
+            cursor: pointer;
+            
+            &.selected {
+               color: $gray-200;
+               text-shadow: 0 0 8px rgba($pc2, 0.7);
+            }
+            &:hover {
+               color: $gray-300;
+               text-shadow: 0 0 6px rgba($pc2, 0.6);
+            }
+            @include for-mobile {
+               display: flex;
+               justify-content: center;
+               align-items: center;
+            }
+            > svg {
+               opacity: 1;
+               fill: #fff;
+               fill-opacity: 0.2;
+               stroke: #f33f88;
+               stroke-opacity: 0;
+               stroke-width: 2px;
+               width: 95%;
+               margin: 1rem auto 2rem;
+               transition: all 0.8s ease;
+               &:hover {
+                  fill-opacity: 0.4;
+                  stroke-width: 1px;
+                  stroke-opacity: 0.4;
+               }
+               @include for-mobile {
+                  width: 40%;
+                  margin: 1rem auto;
+                  fill: $gray-700;
+               }
+            }
+            > .catLabel {
+               display: block;
+               font-size: $fontSize-h5;
+               font-family: $font--Hx;
+               font-weight: 400;
+               @include for-mobile() {
+                  position: absolute;
+               }
+            }
+         }
+                  
+      }
+   }  
+}
+
+.grid-item, .grid-sizer {
+   width: 33.333%;
+   @include for-mobile() {
+      width: 100%;
+   }
+   @include breakpoint($sm, $md) {
+      width: 50%;
+   }
+}
+
+.grid-item {
+   position: relative;
+   //flex: 0 1 33%;
+   //display: flex;
+   ._img {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      img {
+         display: block;
+         max-width: 100%;
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         opacity: 0.85;
+         filter: grayscale(50%);
+         transform: scale(1);
+         transition: all 200ms ease-out;
+      }
+      figcaption {
+         position: absolute;
+         left: 0;
+         bottom: 0;
+         opacity: 0;
+         transform: translateY(100px);
+         transition: all 400ms ease;
+      }
+      &:hover {
+         //background-color: $pc4;
+         img {
+            filter: grayscale(0);
+            opacity: 1;
+            transform: scale(1.1);
+         }
+         figcaption {
+            opacity: 1;
+            transform: translateY(0);
+         }
+      }
+   }
+}
+
+
+
+/*.drawings,
+.paintings,
+.uv,
+.digital {
+   will-change: transform;
+   opacity: 0;
+   transform: scale(0);
+   transform: all 300ms ease;
+   &.show {
+      visibility: visible;
+      flex-grow: 1;
+      flex-shrink: 0;
+      opacity: 1;
+      transform: scaleX(1);
+      transition-property: visibility, transform, opacity, flex;
+      transition-duration: 100ms, 600ms, 100ms, 0ms;
+      transition-delay: 0ms, 500ms, 600ms, 0ms;
+   }
+   &.hide {
+      visibility: hidden;
+      flex-grow: 0;
+      flex-shrink: 1;
+      flex-basis: 100%;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      transform: scaleX(0);
+      transition-property: transform;
+      transition-duration: 300ms;
+      transition-delay: 0ms;
+   }
+   
+}*/

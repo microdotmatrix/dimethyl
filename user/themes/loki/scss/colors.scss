@@ -1,0 +1,5 @@
+@import "utilities/scss-color/farbig";
+
+$color: #6c29d4;
+$palette: generate-palette($color);
+//@include generate-color-classes($prefix, $palette);

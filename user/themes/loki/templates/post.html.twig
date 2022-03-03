@@ -1,0 +1,62 @@
+{% extends 'partials/base.html.twig' %}
+
+{% set hero_image = page.media.images|first %}
+
+{% block content %}
+   <header id="post-hero" class="hero jarallax blobFX" data-speed="0.42">
+      {% include "blog/post-hero.html.twig" %}
+	</header>
+
+   <section id="breadcrumbs">
+      <div class="__crumb-contain">
+         {% if config.plugins.breadcrumbs.enabled %}
+            <div id="crumb-nav">{% include 'blog/breadcrumbs.html.twig' %}</div>
+         {% endif %}
+         {% if grav.theme.config.post.navigation %}
+            <div id="page-nav">{% include 'blog/pagination.html.twig' %}</div>
+         {% endif %}
+      </div>
+   </section>
+
+   <main id="articles">
+      <header id="post-header">
+         {% include "blog/author.html.twig" %}
+      </header>
+
+      <article id="post-content">
+         {{ page.content|raw }}
+      </article>
+
+      <footer id="post-footer">
+         <section class="__share">
+            {% include "partials/sharing.html.twig" %}
+         </section>
+         
+         <section class="__taxonomy">
+            {% if grav.theme.config.post.taxonomy is defined %}
+               {% if grav.theme.config.post.taxonomy %}
+                  {% include "blog/taxonomy.html.twig" %}
+               {% endif %}
+            {% endif %}
+         </section>
+
+         {# Show navigation if enabled, defaults to true #}
+         <section class="__pagination">
+            {% if grav.theme.config.post.navigation is defined %}
+               {% if grav.theme.config.post.navigation %}
+                  {% include 'blog/pagination.html.twig' %}
+               {% endif %}
+            {% else %}
+               <p><small>You've reached the end...</small></p>
+            {% endif %}
+         </section>
+      </footer>
+   </main>
+{% endblock %}
+
+{% block bottom %}
+   {{ parent() }}
+   <script>
+      $('.jarallax').jarallax();
+   </script>
+{% endblock %}

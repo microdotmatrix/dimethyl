@@ -1,0 +1,18 @@
+{% extends "partials/base.html.twig" %}
+
+{% block content %}
+   <header class="hero">
+      <h2>Shop</h2>
+   </header>
+
+   <main id="shop">
+      {{ page.content|raw }}
+      <h3>Collections...</h3>
+      <hr>
+      <section>
+         {% for p in page.find('/shop').children.order('date', 'desc') %}
+            {% include "shop/categories.html.twig" %}
+         {% endfor %}
+      </section>
+   </main>
+{% endblock %}

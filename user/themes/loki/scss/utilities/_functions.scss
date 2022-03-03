@@ -1,0 +1,498 @@
+// Color and Calculation Functions from Bootstrap, Bulma, Foundation, etc...
+
+$_luminance-list: .0008 .001 .0011 .0013 .0015 .0017 .002 .0022 .0025 .0027 .003 .0033 .0037 .004 .0044 .0048 .0052 .0056 .006 .0065 .007 .0075 .008 .0086 .0091 .0097 .0103 .011 .0116 .0123 .013 .0137 .0144 .0152 .016 .0168 .0176 .0185 .0194 .0203 .0212 .0222 .0232 .0242 .0252 .0262 .0273 .0284 .0296 .0307 .0319 .0331 .0343 .0356 .0369 .0382 .0395 .0409 .0423 .0437 .0452 .0467 .0482 .0497 .0513 .0529 .0545 .0561 .0578 .0595 .0612 .063 .0648 .0666 .0685 .0704 .0723 .0742 .0762 .0782 .0802 .0823 .0844 .0865 .0887 .0908 .0931 .0953 .0976 .0999 .1022 .1046 .107 .1095 .1119 .1144 .117 .1195 .1221 .1248 .1274 .1301 .1329 .1356 .1384 .1413 .1441 .147 .15 .1529 .1559 .159 .162 .1651 .1683 .1714 .1746 .1779 .1812 .1845 .1878 .1912 .1946 .1981 .2016 .2051 .2086 .2122 .2159 .2195 .2232 .227 .2307 .2346 .2384 .2423 .2462 .2502 .2542 .2582 .2623 .2664 .2705 .2747 .2789 .2831 .2874 .2918 .2961 .3005 .305 .3095 .314 .3185 .3231 .3278 .3325 .3372 .3419 .3467 .3515 .3564 .3613 .3663 .3712 .3763 .3813 .3864 .3916 .3968 .402 .4072 .4125 .4179 .4233 .4287 .4342 .4397 .4452 .4508 .4564 .4621 .4678 .4735 .4793 .4851 .491 .4969 .5029 .5089 .5149 .521 .5271 .5333 .5395 .5457 .552 .5583 .5647 .5711 .5776 .5841 .5906 .5972 .6038 .6105 .6172 .624 .6308 .6376 .6445 .6514 .6584 .6654 .6724 .6795 .6867 .6939 .7011 .7084 .7157 .7231 .7305 .7379 .7454 .7529 .7605 .7682 .7758 .7835 .7913 .7991 .807 .8148 .8228 .8308 .8388 .8469 .855 .8632 .8714 .8796 .8879 .8963 .9047 .9131 .9216 .9301 .9387 .9473 .956 .9647 .9734 .9823 .9911 1;
+
+@function color-contrast($background, $color-contrast-dark: $color-contrast-dark, $color-contrast-light: $color-contrast-light, $min-contrast-ratio: $min-contrast-ratio) {
+   $foregrounds: $color-contrast-light, $color-contrast-dark, $white, $black;
+   $max-ratio: 0;
+   $max-ratio-color: null;
+   
+   @each $color in $foregrounds {
+      $contrast-ratio: contrast-ratio($background, $color);
+      @if $contrast-ratio > $min-contrast-ratio {
+         @return $color;
+      } @else if $contrast-ratio > $max-ratio {
+         $max-ratio: $contrast-ratio;
+         $max-ratio-color: $color;
+      }
+   }
+   
+   @warn "Found no color leading to #{$min-contrast-ratio}:1 contrast ratio against #{$background}...";
+   
+   @return $max-ratio-color;
+}
+
+@function contrast-ratio($background, $foreground: $color-contrast-light) {
+   $l1: luminance($background);
+   $l2: luminance(opaque($background, $foreground));
+   
+   @return if($l1 > $l2, divide($l1 + .05, $l2 + .05), divide($l2 + .05, $l1 + .05));
+}
+
+// Return WCAG2.0 relative luminance
+// See https://www.w3.org/WAI/GL/wiki/Relative_luminance
+// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+@function luminance($color) {
+   $rgb: (
+   "r": red($color),
+   "g": green($color),
+   "b": blue($color)
+   );
+   
+   @each $name, $value in $rgb {
+      $value: if(divide($value, 255) < .03928, divide(divide($value, 255), 12.92), nth($_luminance-list, $value + 1));
+      $rgb: map-merge($rgb, ($name: $value));
+   }
+   
+   @return (map-get($rgb, "r") * .2126) + (map-get($rgb, "g") * .7152) + (map-get($rgb, "b") * .0722);
+}
+
+// Return opaque color
+// opaque(#fff, rgba(0, 0, 0, .5)) => #808080
+@function opaque($background, $foreground) {
+   @return mix(rgba($foreground, 1), $background, opacity($foreground) * 100);
+}
+
+// scss-docs-start color-functions
+// Tint a color: mix a color with white
+@function tint-color($color, $weight) {
+   @return mix(white, $color, $weight);
+}
+
+// Shade a color: mix a color with black
+@function shade-color($color, $weight) {
+   @return mix(black, $color, $weight);
+}
+
+// Shade the color if the weight is positive, else tint it
+@function shift-color($color, $weight) {
+   @return if($weight > 0, shade-color($color, $weight), tint-color($color, -$weight));
+}
+
+// Return valid calc
+@function add($value1, $value2, $return-calc: true) {
+   @if $value1 == null {
+      @return $value2;
+   }
+   
+   @if $value2 == null {
+      @return $value1;
+   }
+   
+   @if type-of($value1) == number and type-of($value2) == number and comparable($value1, $value2) {
+      @return $value1 + $value2;
+   }
+   
+   @return if($return-calc == true, calc(#{$value1} + #{$value2}), $value1 + unquote(" + ") + $value2);
+}
+
+@function subtract($value1, $value2, $return-calc: true) {
+   @if $value1 == null and $value2 == null {
+      @return null;
+   }
+   
+   @if $value1 == null {
+      @return -$value2;
+   }
+   
+   @if $value2 == null {
+      @return $value1;
+   }
+   
+   @if type-of($value1) == number and type-of($value2) == number and comparable($value1, $value2) {
+      @return $value1 - $value2;
+   }
+   
+   @if type-of($value2) != number {
+      $value2: unquote("(") + $value2 + unquote(")");
+   }
+   
+   @return if($return-calc == true, calc(#{$value1} - #{$value2}), $value1 + unquote(" - ") + $value2);
+}
+
+@function divide($dividend, $divisor, $precision: 10) {
+   $sign: if($dividend > 0 and $divisor > 0 or $dividend < 0 and $divisor < 0, 1, -1);
+   $dividend: abs($dividend);
+   $divisor: abs($divisor);
+   @if $dividend == 0 {
+      @return 0;
+   }
+   @if $divisor == 0 {
+      @error "Cannot divide by 0";
+   }
+   $remainder: $dividend;
+   $result: 0;
+   $factor: 10;
+   @while ($remainder > 0 and $precision >= 0) {
+      $quotient: 0;
+      @while ($remainder >= $divisor) {
+         $remainder: $remainder - $divisor;
+         $quotient: $quotient + 1;
+      }
+      $result: $result * 10 + $quotient;
+      $factor: $factor * .1;
+      $remainder: $remainder * 10;
+      $precision: $precision - 1;
+      @if ($precision < 0 and $remainder >= $divisor * 5) {
+         $result: $result + 1;
+      }
+   }
+   $result: $result * $factor * $sign;
+   $dividend-unit: unit($dividend);
+   $divisor-unit: unit($divisor);
+   $unit-map: (
+   "px": 1px,
+   "rem": 1rem,
+   "em": 1em,
+   "%": 1%
+   );
+   @if ($dividend-unit != $divisor-unit and map-has-key($unit-map, $dividend-unit)) {
+      $result: $result * map-get($unit-map, $dividend-unit);
+   }
+   @return $result;
+}
+
+@function mergeColorMaps($bulma-colors, $custom-colors) {
+   // We return at least Bulma's hard-coded colors
+   $merged-colors: $bulma-colors;
+   
+   // We want a map as input
+   @if type-of($custom-colors) == "map" {
+      @each $name, $components in $custom-colors {
+         // The color name should be a string
+         // and the components either a single color
+         // or a colors list with at least one element
+         @if type-of($name) == "string" and (type-of($components) == "list" or type-of($components) == "color") and length($components) >= 1 {
+            $color-base: null;
+            $color-invert: null;
+            $color-light: null;
+            $color-dark: null;
+            $value: null;
+            
+            // The param can either be a single color
+            // or a list of 2 colors
+            @if type-of($components) == "color" {
+               $color-base: $components;
+               $color-invert: findColorInvert($color-base);
+               $color-light: findLightColor($color-base);
+               $color-dark: findDarkColor($color-base);
+            }
+            @else if type-of($components) == "list" {
+               $color-base: nth($components, 1);
+               
+               // If Invert, Light and Dark are provided
+               @if length($components) > 3 {
+                  $color-invert: nth($components, 2);
+                  $color-light: nth($components, 3);
+                  $color-dark: nth($components, 4);
+                  
+                  // If only Invert and Light are provided
+               }
+               @else if length($components) > 2 {
+                  $color-invert: nth($components, 2);
+                  $color-light: nth($components, 3);
+                  $color-dark: findDarkColor($color-base);
+                  
+                  // If only Invert is provided
+               }
+               @else {
+                  $color-invert: nth($components, 2);
+                  $color-light: findLightColor($color-base);
+                  $color-dark: findDarkColor($color-base);
+               }
+            }
+            
+            $value: $color-base, $color-invert, $color-light, $color-dark;
+            
+            // We only want to merge the map if the color base is an actual color
+            @if type-of($color-base) == "color" {
+               // We merge this colors elements as map with Bulma's colors map
+               // (we can override them this way, no multiple definition for the same name)
+               // $merged-colors: map_merge($merged-colors, ($name: ($color-base, $color-invert, $color-light, $color-dark)))
+               $merged-colors: map_merge($merged-colors, ($name: $value));
+            }
+         }
+      }
+   }
+   
+   @return $merged-colors;
+}
+
+@function powerNumber($number, $exp) {
+   $value: 1;
+   
+   @if $exp > 0 {
+      @for $i from 1 through $exp {
+         $value: $value * $number;
+      }
+   }
+   @else if $exp < 0 {
+      @for $i from 1 through -$exp {
+         $value: divide($value, $number);
+      }
+   }
+   
+   @return $value;
+}
+
+@function colorLuminance($color) {
+   @if type-of($color) != "color" {
+      @return 0.55;
+   }
+   
+   $color-rgb: ("red": red($color), "green": green($color), "blue": blue($color));
+   
+   @each $name, $value in $color-rgb {
+      $adjusted: 0;
+      $value: divide($value, 255);
+      
+      @if $value < 0.03928 {
+         $value: divide($value, 12.92);
+      }
+      @else {
+         $value: divide($value + 0.055, 1.055);
+         $value: powerNumber($value, 2);
+      }
+      
+      $color-rgb: map-merge($color-rgb, ($name: $value));
+   }
+   
+   @return map-get($color-rgb, "red") * 0.2126 + map-get($color-rgb, "green") * 0.7152 + map-get($color-rgb, "blue") * 0.0722;
+}
+
+@function findColorInvert($color) {
+   @if colorLuminance($color) > 0.55 {
+      @return rgba(#000, 0.7);
+   }
+   @else {
+      @return #fff;
+   }
+}
+
+@function findLightColor($color) {
+   @if type-of($color) == "color" {
+      $l: 96%;
+      
+      @if lightness($color) > 96% {
+         $l: lightness($color);
+      }
+      
+      @return change-color($color, $lightness: $l);
+   }
+   
+   @return $background;
+}
+
+@function findDarkColor($color) {
+   @if type-of($color) == "color" {
+      $base-l: 29%;
+      $luminance: colorLuminance($color);
+      $luminance-delta: 0.53 - $luminance;
+      $target-l: round($base-l + $luminance-delta * 53);
+      
+      @return change-color($color, $lightness: max($base-l, $target-l));
+   }
+   
+   @return $text-strong;
+}
+
+// CONVERT TO REM
+@function convert-to-rem($value, $base-value: $rem-base) {
+   $value: strip-unit($value) / strip-unit($base-value) * 1rem;
+   @if ($value == 0rem) { $value: 0; } // Turn 0rem into 0
+   @return $value;
+}
+
+@function data($attr) {
+   @if $namespace {
+      @return '[data-' + $namespace + '-' + $attr + ']';
+   }
+   
+   @return '[data-' + $attr + ']';
+}
+
+// REM CALC
+
+// New Syntax, allows to optionally calculate on a different base value to counter compounding effect of rem's.
+// Call with 1, 2, 3 or 4 parameters, 'px' is not required but supported:
+//
+//   rem-calc(10 20 30px 40);
+//
+// Space delimited, if you want to delimit using comma's, wrap it in another pair of brackets
+//
+//   rem-calc((10, 20, 30, 40px));
+//
+// Optionally call with a different base (eg: 8px) to calculate rem.
+//
+//   rem-calc(16px 32px 48px, 8px);
+//
+// If you require to comma separate your list
+//
+//   rem-calc((16px, 32px, 48), 8px);
+
+@function rem-calc($values, $base-value: $rem-base) {
+   $max: length($values);
+   
+   @if $max == 1 { @return convert-to-rem(nth($values, 1), $base-value); }
+   
+   $remValues: ();
+   @for $i from 1 through $max {
+      $remValues: append($remValues, convert-to-rem(nth($values, $i), $base-value));
+   }
+   @return $remValues;
+}
+
+
+@function em-calc($values, $base-value: $rem-base) {
+   $remValues: rem-calc($values, $base-value: $rem-base);
+   
+   $max: length($remValues);
+   
+   @if $max == 1 { @return strip-unit(nth($remValues, 1)) * 1em; }
+   
+   $emValues: ();
+   @for $i from 1 through $max {
+      $emValues: append($emValues, strip-unit(nth($remValues, $i)) * 1em);
+   }
+   @return $emValues;
+}
+
+// return color with different opacity value
+@function alpha($color, $opacity) {
+   $color: str-replace($color, 'var(');
+   $color: str-replace($color, ')');
+   $color-h: var(#{$color+'-h'});
+   $color-s: var(#{$color+'-s'});
+   $color-l: var(#{$color+'-l'});
+   @return hsla($color-h, $color-s, $color-l, $opacity);
+}
+
+// return color with different lightness value
+@function lightness($color, $lightnessMultiplier) {
+   $color: str-replace($color, 'var(');
+   $color: str-replace($color, ')');
+   $color-h: var(#{$color+'-h'});
+   $color-s: var(#{$color+'-s'});
+   $color-l: var(#{$color+'-l'});
+   @return hsl($color-h, $color-s, calc(#{$color-l} * #{$lightnessMultiplier}));
+}
+
+// modify color HSLA values
+@function adjustHSLA($color, $hueMultiplier: 1, $saturationMultiplier: 1, $lightnessMultiplier: 1, $opacity: 1) {
+   $color: str-replace($color, 'var(');
+   $color: str-replace($color, ')');
+   $color-h: var(#{$color+'-h'});
+   $color-s: var(#{$color+'-s'});
+   $color-l: var(#{$color+'-l'});
+   @return hsla(calc(#{$color-h} * #{$hueMultiplier}), calc(#{$color-s} * #{$saturationMultiplier}), calc(#{$color-l} * #{$lightnessMultiplier}), $opacity);
+}
+
+// replace substring with another string
+// credits: https://css-tricks.com/snippets/sass/str-replace-function/
+@function str-replace($string, $search, $replace: '') {
+   $index: str-index($string, $search);
+   @if $index {
+      @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+   }
+   @return $string;
+}
+
+// Calc Functions Stolen From Locomotive Boilerplate...
+// ==========================================================================
+
+//
+// Converts the given pixel value to its EM quivalent.
+//
+// @param  {Number} $size                     - The pixel value to convert.
+// @param  {Number} $base [$font-size] - The assumed base font size.
+// @return {Number} Scalable pixel value in EMs.
+//
+@function em($size, $base: $font-size) {
+   @if (type-of($size) == number) {
+      @if (unit($size) != "px") {
+         @error "`#{$size}` needs to be a pixel value.";
+      }
+   } @else {
+      @error "`#{$size}` needs to be a number.";
+   }
+   
+   @if (type-of($base) == number) {
+      @if (unit($base) != "px") {
+         @error "`#{$base}` needs to be a pixel value.";
+      }
+   } @else {
+      @error "`#{$base}` needs to be a number.";
+   }
+   
+   @return ($size / $base) * 1em;
+}
+
+//
+// Converts the given pixel value to its REM quivalent.
+//
+// @param  {Number} $size                     - The pixel value to convert.
+// @param  {Number} $base [$font-size] - The assumed base font size.
+// @return {Number} Scalable pixel value in REMs.
+//
+@function rem($size, $base: $font-size-px) {
+   @if (type-of($size) == number) {
+      @if (unit($size) != "px") {
+         @error "`#{$size}` needs to be a pixel value.";
+      }
+   } @else {
+      @error "`#{$size}` needs to be a number.";
+   }
+   
+   @if (type-of($base) == number) {
+      @if (unit($base) != "px") {
+         @error "`#{$base}` needs to be a pixel value.";
+      }
+   } @else {
+      @error "`#{$base}` needs to be a number.";
+   }
+   
+   @return ($size / $base) * 1rem;
+}
+
+//
+// Converts a number to a percentage.
+//
+// @alias  percentage()
+// @link   http://sassdoc.com/annotations/#alias
+// @param  {Number} $number - The value to convert.
+// @return {Number} A percentage.
+//
+@function span($number) {
+   @return percentage($number);
+}
+
+
+// Palette Selector 
+
+@function palette($colorMap, $shade) { 
+   
+   @if map-has-key($colorMap, $shade) {
+      $shade: map-get($colorMap, $shade);
+   } @else {
+      @if type-of($shade) != colour {
+         @error "Invalid colour name: `#{$shade}`.";
+      }
+   }
+   
+   @return $shade;
+}
+
+// Social Media Color Map Function stolen from Spice Sass...
+
+@function socialMedia($platform) { 
+   
+   @if map-has-key($social-colors, $platform) {
+      $platform: map-get($social-colors, $platform);
+   } @else {
+      @if type-of($platform) != colour {
+         @error "Invalid colour name: `#{$platform}`.";
+      }
+   }
+   
+   @return $platform;
+}

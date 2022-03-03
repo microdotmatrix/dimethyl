@@ -1,0 +1,48 @@
+:root {
+   --hero-padding: 10rem 0 8rem;
+}
+
+.hero {
+   display: flex;
+   align-items: flex-end;
+   position: relative;
+   padding: var(--hero-padding);
+   width: 100%;
+   z-index: 1;
+   clip-path: var(--hero-clip);
+   &.jarallax {
+      .jarallax-img {
+         --hero-img-opacity: 0.25;
+      }
+   }
+   > article {
+      @include container;
+      z-index: 2;
+   }
+
+   blockquote {
+      margin-left: 6rem;
+      margin-top: 0.5rem;
+      font-size: $fontSize-large;
+      max-width: 42ch;
+      &::before {
+         content: "\f10d";
+         font-family: $icons;
+         font-size: 5.4rem;
+         color: $pc4;
+         position: absolute;
+         z-index: -1;
+         margin-top: -2.5rem;
+         margin-left: -2.5rem;
+         opacity: 0.4;
+      }
+      > cite {
+         font-size: $fontSize-p;
+         color: ocTeal(7);
+         font-weight: 500;
+         float: right;
+         margin-top: 1.25rem;
+         margin-right: 6rem;
+      }
+   }
+}

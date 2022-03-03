@@ -1,0 +1,96 @@
+title: modular
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        inhalt:
+          type: tab
+          title: "Content"
+          fields:
+            content:
+              type: section
+              underline: true
+              fields:
+                header.title:
+                  type: text
+                  autofocus: true
+                  label: "Title"
+                header.image:
+                  type: filepicker
+                  label: "Header Image"
+                  preview_images: true
+                header.claimswitch:
+                  type: toggle
+                  label: "Some Fucking Switch"
+                  highlight: 0
+                  default: 0
+                  options:
+                    0: PLUGIN_ADMIN.DISABLED
+                    1: PLUGIN_ADMIN.ENABLED
+                  validate:
+                    type: bool
+                header.claim:
+                  type: textarea
+                  label: "Wtf is Claim"
+                  rows: 5
+                  size: medium
+                header.claimasmarkdown:
+                  type: toggle
+                  label: "Claims as Markdown?"
+                  highlight: 0
+                  default: 0
+                  options:
+                    0: PLUGIN_ADMIN.DISABLED
+                    1: PLUGIN_ADMIN.ENABLED
+                  validate:
+                    type: bool
+                header.removeheader:
+                  type: toggle
+                  label: "Remove Header"
+                  highlight: 0
+                  default: 0
+                  options:
+                    0: PLUGIN_ADMIN.DISABLED
+                    1: PLUGIN_ADMIN.ENABLED
+                  validate:
+                    type: bool
+            media:
+              type: section
+              title: "Page Media"
+              underline: true
+              fields:
+                header.media_order:
+                  type: pagemedia
+            settings:
+              type: section
+              title: "Settings"
+              underline: true
+              fields:
+                header.content.items:
+                  type: select
+                  label: PLUGIN_ADMIN.ITEMS
+                  default: '@self.modular'
+                  options:
+                    '@self.modular': Modular Children
+
+                header.content.order.by:
+                  type: select
+                  label: PLUGIN_ADMIN.ORDER_BY
+                  default: folder
+                  options:
+                    folder: PLUGIN_ADMIN.FOLDER
+                    title: PLUGIN_ADMIN.TITLE
+                    date: PLUGIN_ADMIN.DATE
+                    default: PLUGIN_ADMIN.DEFAULT
+
+                header.content.order.dir:
+                  type: select
+                  label: PLUGIN_ADMIN.ORDER
+                  default: asc
+                  options:
+                    asc: PLUGIN_ADMIN.ASCENDING
+                    desc: PLUGIN_ADMIN.DESCENDING

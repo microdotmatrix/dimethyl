@@ -1,0 +1,50 @@
+{% extends "partials/base.html.twig" %}
+
+{% block content %}
+   <header id="shop-hero" class="hero blobFX">
+      <div class="blobFX-bg __contain">
+         <section class="heading">
+            <h2>Shop</h2>
+         </section>
+         <section>
+            <article>
+               <figure class="__new-item">
+                  <img src='http://unsplash.it/800/600?random&gravity=center' class="__parallax-img" alt='New Item'/>
+               </figure>
+               <div class="__product">
+                  <div class="__name">
+                     <h3>Teledildonics</h3>
+                  </div>
+                  <div class="__price">
+                     <h1>$33.69</h1>
+                  </div>
+                  <div class="__description">
+                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam tenetur quos vero vel similique excepturi exercitationem, asperiores repellat mollitia. Earum quo soluta quia sunt nesciunt velit eveniet natus voluptatibus. Suscipit!</p>
+                  </div>
+                  <a href="#" class="__cart">Add to Cart</a>
+               </div>
+            </article>
+         </section>
+      </div>
+   </header>
+
+   <main id="shop">
+      {{ page.content|raw }}
+      <h3 class="element">Collections...</h3>
+      <hr>
+      <section class="cat-listing">
+         {% for cats in page.find('/shop').children %}
+            {% include "shop/categories.html.twig" with {'page': child, 'parent': page} %}
+         {% endfor %}
+      </section>
+   </main>
+{% endblock %}
+
+{% block bottom %}
+   {{ parent() }}
+   <script>
+      BackgroundCheck.init({
+         targets: '.target'
+      });
+   </script>
+{% endblock %}

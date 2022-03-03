@@ -1,0 +1,20 @@
+<div id="welcome">
+   <div class="__about">
+      <div class="__greetings">
+         <div class="intro">
+            <div class="__hi">Hi,</div> <div class="__im">I'm</div> <div class="__slayley">Slayley</div>
+         </div>
+      </div>
+      <div class="__content">{{ content|raw }}</div>
+   </div>
+   
+   <div class="__learn-more">
+      <figure class="avatar">
+         {% set welcome_img = page.media.images|first %}
+         <img src="{{ welcome_img.url }}" alt="Hi, I'm Slayley">
+      </figure>
+      <a href="about/" class="about">About Me</a>
+      <a href="gallery/" class="art">See My Work</a>
+      <a href="contact/" class="contact">Contact Me</a>
+   </div>
+</div>

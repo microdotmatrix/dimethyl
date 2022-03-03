@@ -1,0 +1,88 @@
+{% extends "partials/base.html.twig" %}
+
+{% block javascripts %}
+   {{ parent() }}
+   {% do assets.addJs('theme://js/plugins/jarallax/jarallax.min.js', {'priority':90, 'group':'bottom'}) %}
+   {% do assets.addJs('theme://js/plugins/jarallax/jarallax-video.min.js', {'priority':88, 'group':'bottom'}) %}
+   {% do assets.addJs('theme://js/plugins/activate-power-mode.js', {'priority':86, 'group':'bottom'}) %}
+{% endblock %}
+
+{% block content %}
+   <!--<header id="contact-hero" class="hero jarallax blobFX" data-speed="1.3">
+      <div class="_img blobFX-bg">
+         <img src="{#{ page.media.images['blurry.jpg'].url }#}" alt="{#{ page.title }#}" class="jarallax-img">
+      </div>
+      <article class="__content">
+         <h1 id="gsap--contactH1">Contact Me</h1>
+         <div id="gsap--contactSub">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis necessitatibus labore ullam natus doloribus sit tenetur placeat et molestiae doloremque quae laboriosam incidunt alias illum, possimus, eum eligendi facere repellat?</div>
+      </article> 
+   </header>-->
+
+   <header id="contact-hero" class="hero jarallax blobFX" data-video-src="https://youtu.be/M3iOROuTuMA">
+      <div class="blobFX-bg"></div>
+      <article class="__content">
+         <div class="__page-info">
+            <h1 id="gsap--contactH1">Contact Me</h1>
+            <div id="gsap--contactSub" class="__sub-heading">Do you like what you've seen? Questions, comments, suggestions? Let's hear it.</div>
+         </div>
+         <div class="__profile-img">
+            <img src="{{ page.media.images['hayglitch.jpg'].url }}" alt="{{ site.title }}">
+         </div>
+      </article>
+   </header>
+   
+   <main id="contact">
+      <section class="__content">
+         <article class="__form">
+            {% include "forms/form.html.twig" %}
+         </article>
+         <aside>
+            {{ page.content|raw }}
+            
+            <h5>Find me on social media...</h5>
+            
+            {% for type, meta in theme_config.slayley.social %}
+               <div class="__social">
+                  <a href="{{ meta.url }}" {% if meta.rel %}rel="{{ meta.rel }}" {% endif %}class="btn" title="{{ meta.title }}" target="_blank">
+                     <i class="fab fa-{{ meta.icon }}"></i> <span>{{ meta.title }}</span>
+                  </a>
+               </div>
+            {% endfor %}
+
+         </aside>
+      </section>
+   </main>
+{% endblock %}
+
+{% block bottom %}
+   {{ parent() }}
+   <script>
+      POWERMODE.colorful = true; // make power mode colorful
+      POWERMODE.shake = false; // turn off shake
+      document.body.addEventListener('input', POWERMODE);
+
+      $('.jarallax').jarallax({
+         videoStartTime: 04,
+         videoEndTime: 109,
+         videoLoop: true
+      });
+
+      $(document).ready(function(){
+         gsap.fromTo("#gsap--contactH1", { scale: 1.5, opacity: 0 }, {
+            duration: 1,
+            scale: 1,
+            opacity: 1,
+            delay: 1.5,
+            ease: "sine"
+         });
+
+         gsap.fromTo("#gsap--contactSub", { scale: 1.2, opacity: 0 }, {
+            duration: 1,
+            scale: 1,
+            opacity: 1,
+            delay: 1.5,
+            ease: "sine"
+         });
+      });
+   </script>
+{% endblock %}

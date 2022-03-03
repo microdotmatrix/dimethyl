@@ -1,0 +1,41 @@
+// Auto-generate class name identifiers for social media icons with associated color scheme
+
+@each $name, $color in $social-colors {
+   .icon-#{$name} {
+      color: #{$color};
+   }
+   .bg-#{$name} {
+      background-color: #{$color};
+      color: #fff;
+   }
+}
+
+.svg {
+   position: relative;
+   display: inline-block;
+   background-repeat: no-repeat;
+   background-size: contain;
+   background-position: center center;
+   @include size(1rem);
+   &.__calendar {
+      background-image: url('#{$svg-path}/nucleo/blog/calendar-2-2.svg');
+   }
+   &.__location-dot {
+      background-image: url('#{$svg-path}/solid/location-dot.svg');
+   }
+   &.__location-dot--red {
+      background-image: url('#{$svg-path}/color/location-dot__red.svg');
+   }
+   &.__newspaper {
+      background-image: url('#{$svg-path}/regular/newspaper.svg');
+   }
+   &.__event {
+      background-image: url('#{$svg-path}/nucleo/blog/time-clock-2.svg');
+   }
+   &.__project {
+      background-image: url('#{$svg-path}/nucleo/blog/blueprint.svg');
+   }
+   &.__skull {
+      background-image: url('#{$svg-path}/nucleo/blog/skull-5.svg');
+   }
+}

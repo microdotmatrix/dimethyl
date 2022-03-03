@@ -1,0 +1,15 @@
+{% set img_01 = art.media.images|first %}
+<article class="thumb {{ art.header.gallery_id }}" data-category="{{ art.header.gallery_id }}">
+   <a rel="lightbox" href="{{ img_01.url }}" class="glightbox"
+      {% if img_01.meta.title is defined %}data-title="{{ img_01.meta.title }}"{% endif %}
+      {% if img_01.meta.caption is defined %} data-description="{{ img_01.meta.caption }}"{% endif %}
+      data-desc-position="right"
+      data-gallery="{{ art.header.gallery_id }}">
+      <figure class="_img">
+         <img src="{{ img_01.url }}" alt="{{ img_01.meta.alt|e }}">
+         <figcaption class="caption">
+            <span>{{ art.header.gallery_id|e }}</span>
+         </figcaption>
+      </figure>
+   </a>
+</article>

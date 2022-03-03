@@ -1,0 +1,158 @@
+$nav-trans: all 0.4s ease;
+
+#page-header {
+   position: fixed;
+   background: linear-gradient(to top, rgba(255, 255, 255, 0.0) 0%, rgba(0, 0, 0, 0.05) 12%, rgba(0, 0, 0, 0.25) 34%, black 100%);
+   &.affix {
+      background-color: rgba($black, 0.65);
+      > header {
+         > * {
+            transition: $nav-trans;
+         }
+         >.head-wrapper {
+            padding: 0.6rem 0;
+            .navbar {
+               #slayley {
+                  > ._icon {
+                     @include size(4rem);
+                     border-width: 5px;
+                     box-shadow: 0 0 15px 0 rgba(#fff, 0.2);
+                  }
+                  > ._title {
+                     font-size: 1.25rem;
+                     letter-spacing: 0.5vw;
+                     margin-left: 4vw;
+                  }
+                  > ._subtitle {
+                     // margin-top: $h4-font-size * 1.65;
+                     left: 3.6rem;
+                     padding-left: 12px;
+                     font-size: 0.666rem;
+                  }
+               }
+               section {
+                  > nav.page-menu {
+                     > a {
+                        font-size: 1rem;
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+   > header {
+      > * {
+         transition: $nav-trans;
+      }
+      > .head-wrapper {
+         @include container;
+         padding: 1.5rem 0 2rem;
+         overflow: hidden;
+         transition: $nav-trans;
+         .navbar {
+            @include flexbox($justify: space-between, $align: stretch);
+            position: relative;
+            z-index: 10;
+            > * {
+               transition: $nav-trans;
+            }
+            section {
+               display: flex;
+               align-items: center;
+               flex: 1 0 0;
+               position: relative;
+               z-index: 10;
+               &:not(:first-child):last-child {
+                  justify-content: flex-end;
+               }
+               > nav.page-menu {
+                  @include flexbox($wrap: nowrap, $justify: flex-end, $align: center, $gap: 0 1.5rem);
+                  > a {
+                     font-family: $gruppo;
+                     font-weight: 400;
+                     font-size: $navLink-size;
+                     color: $navLink-color;
+                     text-decoration: none;
+                     border-radius: 8px;
+                     margin: 0;
+                     padding: 0.2rem 0.65rem;
+                     &:hover {
+                        color: $navLink-hover;
+                     }
+                     &::last-of-type {
+                        margin-right: 0;
+                     }
+                  }
+                  > .selected {
+                     color: $navLink-active;
+                     background-color: rgba($black, 0.4);
+                     // font-size: $navLink-size * 1.2;
+                     font-weight: 600;
+                     backdrop-filter: blur(4px);
+                     
+                  }
+                  > #about\@nav {
+                     &.selected {
+                        background-color: rgba($grey2, 0.2);
+                     }
+                  }
+                  @include for-mobile() {
+                     display: none;
+                  }
+               }
+            }
+            #slayley {
+               > ._icon {
+                  @include size(5.8rem);
+                  background-color: rgba($gray-500, 0.2);
+                  background-image: url('#{$site-url}/#{$root-dir}/user/themes/#{$theme}/images/slayshank-125.png');
+                  background-size: contain;
+                  background-position: center;
+                  background-repeat: no-repeat;
+                  display: inline-block;
+                  position: relative;
+                  border: 8px solid #000;
+                  border-radius: 50%;
+                  box-shadow: 0 0 20px 0 rgba(#fff, 0.2);
+                  z-index: 1;
+                  transition: $nav-trans;
+               }
+               > ._title {
+                  color: $navLink-color;
+                  font-family: $michroma;
+                  font-weight: 600;
+                  font-size: $fontSize-title;
+                  text-decoration: none;
+                  text-transform: uppercase;
+                  letter-spacing: 1vw;
+                  margin-left: $fontSize-title;
+                  position: absolute;
+                  z-index: 1;
+                  &:hover {
+                     color: $navLink-hover;
+                  }
+               }
+               > ._subtitle {
+                  position: absolute;
+                  margin-top: $fontSize-h2;
+                  left: 5.25rem;
+                  padding-left: 15px;
+                  padding-right: 12px;
+                  font-family: $kanit;
+                  font-size: $fontSize-subtitle;
+                  font-weight: 300;
+                  color: $gray-600;
+                  border-top: 1px solid $black;
+               }
+            }
+            > .__login {
+               position: absolute;
+               top: 1rem;
+               right: 2rem;
+               color: #fff;
+            }
+         }
+      }
+   }
+}

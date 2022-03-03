@@ -1,0 +1,92 @@
+title: text
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        inhalt:
+          type: tab
+          title: "Content"
+          fields:
+            header.title:
+              type: text
+              autofocus: true
+              label: "Title"
+            content:
+              type: section
+              title: "Page Content"
+              underline: true
+              fields:
+                header.gallery:
+                  type: pagemedia
+                  label: "Gallery"
+            settings:
+              type: section
+              title: "Settings"
+              underline: true
+              fields:
+                columns:
+                  type: columns
+                  fields:
+                    column1:
+                      type: column
+                      fields:
+                        header.column:
+                          type: select
+                          label: "Content Width"
+                          default: asc
+                          options:
+                            1: "One Column"
+                            2: "Two Columns"
+                        header.showtitle:
+                          type: select
+                          label: "Show Title"
+                          highlight: 1
+                          default: 1
+                          options:
+                            0: "No"
+                            1: "Yes"
+                            2: "Only Placeholder"
+                        header.scale:
+                          type: select
+                          label: "Scale Format"
+                          default: 1
+                          size: medium
+                          options:
+                            1: "4:3"
+                            2: "16:9"
+                            3: "2.35:1"
+                            3: "1:1"
+                            4: "3:4"
+                        header.boxenabled:
+                          type: toggle
+                          label: "Show As Box"
+                          highlight: 0
+                          default: 0
+                          options:
+                            0: PLUGIN_ADMIN.DISABLED
+                            1: PLUGIN_ADMIN.ENABLED
+                        header.boxbgcolor:
+                          type: colorpicker
+                          label: "Background Color"
+                          default: '#ffffff'
+                        header.boxcolor:
+                          type: colorpicker
+                          label: "Text Color"
+                          default: '#000000'
+                        header.boxcorners:
+                          type: text
+                          label: "Border Radius"
+                          default: 0
+                        header.boxbuttontext:
+                          type: text
+                          label: "Title"
+                        header.boxbuttonlabel:
+                          type: text
+                          label: "Link"
+                          default:
+                    column2:
+                      type: column
+                      fields:

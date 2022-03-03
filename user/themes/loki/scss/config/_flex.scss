@@ -1,0 +1,19 @@
+@mixin flexbox($wrap: wrap, $direction: row, $justify: flex-start, $align: flex-start, $basis: 100%, $gap: 0) {
+   display: flex;
+   flex-wrap: $wrap;
+   flex-direction: $direction;
+   justify-content: $justify;
+   align-items: $align;
+   flex-basis: $basis;
+   gap: $gap;
+}
+
+@mixin inline-flex($wrap: wrap, $direction: row, $justify: flex-start, $align: flex-start, $basis: 100%, $gap: 0) {
+   display: inline-flex;
+   flex-wrap: $wrap;
+   flex-direction: $direction;
+   justify-content: $justify;
+   align-items: $align;
+   flex-basis: $basis;
+   gap: $gap;
+}

@@ -1,0 +1,57 @@
+{% extends "partials/base.html.twig" %}
+
+{% block javascripts %}
+   {{ parent() }}
+   {% do assets.addJs('theme://js/plugins/global.js', {'priority':92, 'group':'bottom'}) %}
+   {% do assets.addJs('theme://js/plugins/parallax.js', {'priority':90, 'group':'bottom'}) %}
+{% endblock %}
+
+{% block content %}
+   <div id="blog-hero" class="hero parallax-container">
+      <div class="_header-img parallax">
+         {% for p in page.find('/articles/events').children.order('date', 'desc').slice(0, 1) %}
+         {% set post_img = p.media.images|first %}
+         
+         <article class="__content">
+            <div class="__featured">Featured</div>
+            <div class="__post-date">
+               <i class="fa fa-calendar-day"></i>
+               <time datetime='{{ p.date|date("c") }}'>
+                  {{ p.date|date("M d Y") }}
+               </time>
+            </div>
+            <a href="{{ p.url }}" class="__post-title">{{ p.title }}</a>
+            <div class="__summary">{{ p.summary|raw }}</div>
+            <a href="{{ p.url }}" class="__read-more">Read More...</a>
+         </article>
+         {{ post_img.html()|raw }}
+         {% endfor %}
+      </div>
+   </div>
+
+   <main id="articles">
+      <h2>Events</h2>
+      {{ page.content|raw }}
+
+      {% for p in page.find('/articles/events').children.order('date', 'desc').slice(0, 5) %}
+         <article class="post-listing">
+            <div class="post-title">
+               <h4><a href="{{ p.url }}">{{ p.title }}</a></h4>
+            </div>
+            <div class="post-date">
+               <time class="dt-published" datetime="{{ p.date|date("c") }}">
+               <i class="fa fa-calendar"></i> {{ p.date|date("M d Y") }}
+               </time>
+            </div>
+            <div class="post-summary">
+               {% if p.summary != p.content %}
+                  {{ p.summary|raw }}
+                  <a href="{{ p.url }}" class="read-more">Read More</a>
+               {% else %}
+                  {{ p.content|raw }}
+               {% endif %}
+            </div>
+         </article>
+      {% endfor %}
+   </main>
+{% endblock %}

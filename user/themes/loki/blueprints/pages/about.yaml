@@ -1,0 +1,31 @@
+title: About
+extends@: default
+
+form:
+  fields:
+    content:
+      type: section
+      title: Page Header
+      underline: true
+      fields:
+        header.about_title:
+          type: text
+          label: Intro Title
+        header.about_subtitle:
+          type: text
+          label: Intro Subtitle
+        header.about_intro:
+          type: textarea
+          label: Intro Text
+        header.about_img:
+          type: pagemediaselect
+          label: Intro Image
+          preview_images: true
+        header.about_content_img:
+          type: pagemediaselect
+          label: First Page Sidebar Image
+          preview_images: true
+        header.about_content_img_2:
+          type: pagemediaselect
+          label: Second Page Sidebar Image
+          preview_images: true

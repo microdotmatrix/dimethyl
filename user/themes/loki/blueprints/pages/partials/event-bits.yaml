@@ -1,0 +1,77 @@
+form:
+  fields:
+
+    hero_title:
+      type: spacer
+      title: Hero Section
+
+    header.hero_image:
+      type: filepicker
+      label: Hero Image
+      preview_images: true
+      description: 'If not specified, this defaults to the first image found in the page''s folder'
+
+    toggles_title:
+      type: spacer
+      title: Configuration
+
+    header.blog_url:
+      type: text
+      toggleable: true
+      label: Blog Route
+      help: The route to the main blog page that contains the "Show ..." configuration
+      default: '/articles/events'
+      placeholder: '/articles/events'
+      size: medium
+
+    header.show_breadcrumbs:
+      type: toggle
+      toggleable: true
+      label: Show Breadcrumbs
+      highlight: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    header.show_pagination:
+      type: toggle
+      toggleable: true
+      label: Show Pagination
+      highlight: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+
+    header.event_location:
+      type: text
+      label: Event Location
+      size: medium
+
+    header.event_location_url:
+      type: text
+      label: Event Location URL
+      size: medium
+
+    header.event_date:
+      type: datetime
+      label: Event Date
+      toggleable: true
+      help: PLUGIN_ADMIN.DATE_HELP
+
+    header.event_start-time:
+      type: text
+      label: Starts At
+
+    header.event_end-time:
+      type: text
+      label: Ends At
+
+    header.event_flyer:
+      type: file
+      label: Flyer or Graphic Ad
+      accept:
+        - image/*

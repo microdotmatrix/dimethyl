@@ -1,0 +1,13 @@
+<div class="_img blobFX-bg">
+   <img src="{{ hero_image.url }}" alt="{{ page.title }}" class="jarallax-img opacityMod" loading="lazy">
+</div>
+<section id="featured-posts">
+   {% for p in page.find('/articles/news').children.order('date', 'desc').slice(0, 1) %}
+      {% include "blog/featured.html.twig" %}
+   {% endfor %}
+   <h5 class="__event-heading">Upcoming Events <i class="fa fa-angle-right"></i></h5>
+   <h5 class="__news-heading"><i class="fa fa-angle-down"></i> Latest News</h5>
+   {% for p in page.find('/articles/events').children.order('date', 'desc').slice(0, 1) %}
+      {% include "blog/featured.html.twig" %}
+   {% endfor %}
+</section>

@@ -1,0 +1,48 @@
+// $xs:                       32rem !default; // 512px
+// $sm:                       48rem !default; // 768px
+// $md:                       64rem !default; // 1024px
+// $lg:                       80rem !default; // 1280px
+// $xl:                       90rem !default; // 1440px
+
+// @mixin breakpoint($min: 0, $max: 0) {
+//    $query: "all" !default;
+//    @if $min != 0 and $max != 0 { $query: "(min-width: #{$min}) and (max-width: #{$max})"; }
+//    @else if $min != 0 and $max == 0 { $query: "(min-width: #{$min})"; }
+//    @else if $min == 0 and $max != 0 { $query: "(max-width: #{$max})"; }
+//    @media #{$query} { @content; }
+// }
+
+@mixin for-mobile() {
+   @media only screen and (max-width: $sm - 1) { @content; }
+}
+@mixin not-mobile() {
+   @media only screen and (min-width: $sm) { @content; }
+}
+
+@mixin from($device) {
+   @media screen and (min-width: $device) {
+      @content;
+   }
+}
+
+@mixin until($device) {
+   @media screen and (max-width: $device - 1px) {
+      @content;
+   }
+}
+
+$breakpoints: (
+   xs: 32rem, // ~512px
+   sm: 48rem, // ~768px
+   md: 64rem, // ~1024px
+   lg: 80rem, // ~1280px
+   xl: 90rem  // ~1440px
+) !default;
+
+@mixin pointbreak($breakpoint, $logic: false) {
+   @if( $logic ) {
+      @media #{$logic} and (min-width: map-get($map: $breakpoints, $key: $breakpoint)) { @content; }
+   } @else {
+      @media (min-width: map-get($map: $breakpoints, $key: $breakpoint)) { @content; }
+   }
+}

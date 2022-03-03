@@ -1,0 +1,27 @@
+{% macro loop(page) %}
+   {% for p in page.children.visible().slice(1, 5) %}
+      {% set current_page = (p.active or p.activeChild) ? 'selected' : '' %}
+      {% set footer_icon = p.menu|e %}
+      <a href="{{ p.url|e }}" class="{{ current_page|e }}">
+         {{ p.menu|e }}
+      </a>
+   {% endfor %}
+{% endmacro %}
+
+{% if config.theme.dropdown.enabled %}
+   {{ _self.loop(pages) }}
+{% else %}
+   {% for page in pages.children.visible().slice(1, 5) %}
+      {% set current_page = (page.active or page.activeChild) ? 'selected' : '' %}
+      {% set page_id = page.slug %}
+      <a href="{{ page.url|e }}" id="{{ page_id }}@nav" class="{{ current_page|e }}">
+         {{ page.menu|e }}
+      </a>
+   {% endfor %}
+{% endif %}
+
+{% for mitem in site.menu %}
+   <a href="{{ mitem.url|e }}">
+      {{ mitem.text|e }}
+   </a>
+{% endfor %}

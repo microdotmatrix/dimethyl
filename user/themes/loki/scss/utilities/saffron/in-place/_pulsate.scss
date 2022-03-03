@@ -1,0 +1,29 @@
+@include u-keyframes(pulsate) {
+  0%, 100% {
+    opacity: 1;
+    @include u-transform(scale(1) translateZ(0));
+  }
+  50% {
+    opacity: 0.85;
+    @include u-transform(scale($saf-pulsate-scale));
+  }
+}
+
+@include u-keyframes(boxShadow-pulsate) {
+   0%, 100% {
+     opacity: 1;
+     box-shadow: 0 0 6px 0 rgba(coolSky(sh08), 0.42);
+   }
+   50% {
+     opacity: 0.85;
+     box-shadow: 0 0 8px 0 rgba(coolSky(sh07), 0.8);
+   }
+ }
+
+@mixin pulsate($duration: 1.5s, $delay: 0s, $fill-mode: none, $count: 3) {
+  @include u-animation(pulsate $count $duration $delay $fill-mode);
+}
+
+@mixin boxShadow-pulsate($duration: 1.5s, $delay: 0s, $fill-mode: none, $count: 3) {
+   @include u-animation(boxShadow-pulsate $count $duration $delay $fill-mode);
+}

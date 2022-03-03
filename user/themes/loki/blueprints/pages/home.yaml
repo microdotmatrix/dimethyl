@@ -1,0 +1,25 @@
+title: Home
+extends@: default
+
+form:
+  fields:
+    content:
+      type: section
+      title: Welcome
+      underline: true
+      fields:
+        header.avatar:
+          type: pagemediaselect
+          label: Welcome Image
+          help: 'Select an image you would like to appear in the welcome section.'
+          preview_images: true
+     
+        header.art_preview:
+          type: textarea
+          label: Description of Art previewed on home page
+
+        header.streaming_icon:
+          type: pagemediaselect
+          label: Streaming Content Image
+          help: 'Select an image you would like to appear in the streaming content section.'
+          preview_images: true

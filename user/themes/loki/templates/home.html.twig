@@ -1,0 +1,153 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block javascripts %}
+   {{ parent() }}
+   {% do assets.addJs('theme://js/plugins/glitchslide.js', {'priority':90, 'group':'bottom'}) %}
+{% endblock %}
+
+{% block content %}
+   <header id="intro" class="home-slider">
+      {% include "partials/glitchslide.html.twig" %}
+   </header>
+   
+   <main id="home-page">
+      <section>
+         <article class="__x66 loadAnim">
+            <div id="welcome">
+               <div class="__about">
+                  <div class="__greetings">
+                     <div class="intro">
+                        <div class="__hi">Hi,</div> <div class="__im">I'm</div> <div class="__slayley">Slayley</div>
+                     </div>
+                  </div>
+                  <div class="__content">{{ page.content|raw }}</div>
+               </div>
+               
+               <div class="__learn-more">
+                  <figure class="avatar">
+                     {% if page.header.avatar %}
+                        {{ page.media[page.header.avatar].html()|raw }}
+                     {% else %}
+                        {{ page.find('/images').media['slayshank-250.png'].html()|raw }}
+                     {% endif %}
+                  </figure>
+                  <a href="about/" class="about">About Me</a>
+                  <a href="gallery/" class="art">See My Work</a>
+                  <a href="contact/" class="contact">Contact Me</a>
+               </div>
+            </div>
+         </article>
+         <aside class="__x33 loadAnim">
+            <div id="vgfaf">
+               <h4 class="__visual-arts">🎨 Visual Arts</h4>
+               <h5 class="__gaming">Gaming 🎮</h5>
+               <h5 class="__flow-arts">🤹‍♀️ Flow Arts</h5>
+               <h6 class="__fitness">🏋️‍ Fitness</h6>
+            </div>
+         </aside>
+      </section>
+         
+      {% set social_url = theme_config.slayley.social %}
+      
+      <section>
+         <article class="loadAnim">
+            <div class="__content">
+               <h4>Art & Design</h4>
+               
+               {{ page.header.art_preview|raw }}
+            </div>
+
+            <div id="art-preview">
+               {#% include 'modular/module.html.twig' with {'page': page.find('/portfolio/_drawings')} %#}
+               <div class="grid-sizer" style="display: none;"></div>
+               <div class="grid-item">{% include "modular/preview.html.twig" with {'art': page.find('/portfolio/_drawings')} %}</div>
+               <div class="grid-item">{% include "modular/preview.html.twig" with {'art': page.find('/portfolio/_paintings')} %}</div>
+               <div class="grid-item">{% include "modular/preview.html.twig" with {'art': page.find('/portfolio/_digital')} %}</div>
+               <div class="grid-item">{% include "modular/preview.html.twig" with {'art': page.find('/portfolio/_uv')} %}</div>
+            </div>   
+         </article>
+               
+         <aside class="loadAnim">
+            <div id="twitch-box" class="__streaming">
+               <iframe src="https://player.twitch.tv/?video=875487345&parent=www.example.com" frameborder="0" allowfullscreen="true" scrolling="no" height="auto" width="100%" parent="https://slayley/"></iframe>
+            </div>
+
+            <div class="__streaming">
+               <div class="interact">
+                  <h4>Live Stream</h4>
+                  <p>Find me on Twitch: <a href="{{ social_url.twitch.url }}" target="_blank">ggSlayley</a> <a href="{{ social_url.twitch.url }}" target="_blank"><i class="fab fa-twitch"></i></a></p>
+                  <ul>
+                     <li><a href="{{ social_url.streamlabs.url }}" target="_blank">Streamlabs.com/ggSlayley</a><br><small>Support my streaming with a donation!</small></li>
+                     <li><a href="{{ social_url.discord.url }}" target="_blank">Discord: Slayley#3566</a><br><small>Can't be cool without some Discord, am I right kids?</small></li>
+                  </ul>
+               </div>
+               <div class="avatar">
+                  <figure class="ggSlayley">
+                     {% if page.header.streaming_icon %}
+                        {{ page.media[page.header.streaming_icon].html()|raw }}
+                     {% else %}
+                        {{ page.media.images|first.html()|raw }}
+                     {% endif %}
+                  </figure>
+               </div>
+            </div>
+            
+         </aside>
+      </section>
+      <section id="store">
+         <article>
+            <div class="__content loadAnim">
+               <h4>Support the Hustle</h4>
+               <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea sit iste corporis rerum maxime eaque. Expedita pariatur suscipit explicabo accusamus voluptatem at corporis, debitis, maxime commodi natus, nobis architecto maiores?</p>
+            </div>
+            <div class="__new-products loadAnim">
+               <div class="__category">
+                  {% for p in page.find('/shop/glitter-grips').children.order('date', 'desc').slice(0, 2) %}
+                     {% include "shop/products.html.twig" %}
+                  {% endfor %}
+               </div>
+               <div class="__category">
+                  {% for p in page.find('/shop/jewelry').children.order('date', 'desc').slice(0, 2) %}
+                     {% include "shop/products.html.twig" %}
+                  {% endfor %}
+               </div>
+            </div>
+            <div class="__new-products loadAnim">
+               <div class="__category">
+                  {% for p in page.find('/shop/fine-art-prints').children.order('date', 'desc').slice(0, 2) %}
+                     {% include "shop/products.html.twig" %}
+                  {% endfor %}
+               </div>
+               <div class="__category">
+                  {% for p in page.find('/shop/trays').children.order('date', 'desc').slice(0, 2) %}
+                     {% include "shop/products.html.twig" %}
+                  {% endfor %}
+               </div>
+            </div>
+         </article>
+      </section>
+   </main>
+{% endblock %}
+
+{% block bottom %}
+   {{ parent() }}
+   <script>
+      // Home Page Glitchslider Auto Play Function
+      $(document).ready(function(){
+         setInterval(function() {
+            $('.slide-nav__button .next').trigger('click');
+         }, 16000);
+      });
+
+      var $grid = $('#art-preview').imagesLoaded( function() {
+         $grid.isotope({
+            itemSelector: '.grid-item',
+            percentPosition: true,
+            stagger: 40,
+            masonry: {
+               columnWidth: '.grid-sizer'
+            }
+         });
+      });
+   </script>
+{% endblock %}

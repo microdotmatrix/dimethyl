@@ -1,0 +1,157 @@
+{% extends "partials/base.html.twig" %}
+
+{% set hero_image = page.media.images|first %}
+
+{% block content %}
+   <header id="blog-hero" class="hero jarallax blobFX" data-speed="0.42" data-element-in-viewport='.jarallax-img'>
+      {% include "blog/main-hero.html.twig" %}
+   </header>
+
+   <main id="articles">
+      <section class="__blog-intro">
+         <article>
+            <h2>Hits from the Blog</h2>
+            {#{ page.content|raw }#}
+            
+            {% set featured_post = page.collection('news', 'events', 'projects').order('date', 'desc').slice(0, 1) %}
+            {% for p in featured_post %}
+               {% if p.header.post_featured == 'true' %}
+                  {% include "blog/articles.html.twig" %}
+               {% endif %}
+            {% endfor %}
+         </article>
+         <aside>
+            <h4>Art Gallery</h4>
+            <p>My latest creations... see more in my <a href="portolio">porfolio</a>.</p>
+            <div id="art-preview">
+               {% include 'modular/module.html.twig' with {'page': page.find('/portfolio/_uv')} %}
+            </div>
+         </aside>
+      </section>
+      
+      <div class="blog__section--rule"></div>
+
+      <section class="__blog-posts">
+         <div class="__list-container">
+            {% set news = page.collection('news').order('date', 'desc').slice(0, 10) %}
+            {% for p in news %}
+               {#% if child not in taxonomy.findTaxonomy({'tag':'Featured'}) %#}
+               {% if p.header.post_featured == 'false' %}
+                  <div class="__post-container news-item">
+                     {% include 'blog/articles.html.twig' %}
+                  </div>
+               {% endif %}
+            {% endfor %}
+         </div>
+         <div class="__category-heading">
+            <h5>News <i class="svg __newspaper"></i></h5>
+            <div class="__category-info">
+               Most recent updates, announcments, general info.
+            </div>
+            <div class="__category-more">
+               <a href="#" id="loadNews">More Articles...</a>
+            </div>
+         </div>
+      </section>
+      
+      <div class="blog__section--rule"></div>
+
+      <section class="__blog-posts">
+         <div class="__list-container">
+            {% set events = page.collection('events').order('date', 'desc').slice(0, 10) %}
+            {% for p in events %}
+               {#% if child not in taxonomy.findTaxonomy({'tag':'Featured'}) %#}
+               {% if p.header.post_featured == 'false' %}
+                  <div class="__post-container event-item">
+                     {% include 'blog/articles.html.twig' %}
+                  </div>
+               {% endif %}
+            {% endfor %}
+         </div>
+         <div class="__category-heading">
+            <h5>Events <i class="svg __event"></i></h5>
+            <div class="__category-info">
+               Upcoming shows, events, and exhibits.
+            </div>
+            <div class="__category-more">
+               <a href="#" id="loadEvents">More Articles...</a>
+            </div>
+         </div>
+      </section>
+
+      <div class="blog__section--rule"></div>
+      
+      <section class="__blog-posts">
+         <div class="__list-container">
+            {% set projects = page.collection('projects').order('date', 'desc').slice(0, 10) %}
+            {% for p in projects %}
+               {#% if child not in taxonomy.findTaxonomy({'tag':'Featured'}) %#}
+               {% if p.header.post_featured == 'false' %}
+                  <div class="__post-container project-item">
+                     {% include 'blog/articles.html.twig' %}
+                  </div>
+               {% endif %}
+            {% endfor %}
+         </div>
+         <div class="__category-heading">
+            <h5>Projects <i class="svg __project"></i></h5>
+            <div class="__category-info">
+               Projects I'm working on, progress reports, discourse.
+            </div>
+            <div class="__category-more">
+               <a href="#" id="loadProjects">More Articles...</a>
+            </div>
+         </div>
+      </section>
+   </main>
+{% endblock %}
+
+{% block bottom %}
+   {{ parent() }}
+   <script>
+      $('.jarallax').jarallax();
+
+      $(function () {
+         $(".news-item").slice(0, 1).show();
+         $("#loadNews").on('click', function (e) {
+            e.preventDefault();
+            $(".news-item:hidden").slice(1, 5).slideDown();
+            if ($(".news-item:hidden").length == 0) {
+                  $("#load").fadeOut('slow');
+            }
+            $('html,body').animate({
+                  scrollTop: $(this).offset().top
+            }, 1500);
+         });
+      });
+
+      $(function () {
+         $(".event-item").slice(0, 1).show();
+         $("#loadEvents").on('click', function (e) {
+            e.preventDefault();
+            $(".event-item:hidden").slice(1, 5).slideDown();
+            if ($(".event-item:hidden").length == 0) {
+                  $("#load").fadeOut('slow');
+            }
+            $('html,body').animate({
+                  scrollTop: $(this).offset().top
+            }, 1500);
+         });
+      });
+
+      $(function () {
+         $(".project-item").slice(0, 1).show();
+         $("#loadProjects").on('click', function (e) {
+            e.preventDefault();
+            $(".project-item:hidden").slice(1, 5).slideDown();
+            if ($(".project-item:hidden").length == 0) {
+                  $("#load").fadeOut('slow');
+            }
+            $('html,body').animate({
+                  scrollTop: $(this).offset().top
+            }, 1500);
+         });
+      });
+   </script>
+{% endblock %}
+

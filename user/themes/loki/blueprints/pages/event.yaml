@@ -1,0 +1,152 @@
+title: Event
+'@extends':
+    type: default
+    context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      fields:
+        content:
+          fields:
+            header.event.flyer:
+              type: pagemediaselect
+              label: Event Flyer
+              help: Select an image to use for the event flyer.
+              preview_images: true
+            header.post_featured:
+              type: toggle
+              label: 'Make Featured Post'
+              help: 'Click this option to make this post appear in the featured header of the blog listing page.'
+              default: 'false'
+              options:
+                'true': PLUGIN_ADMIN.ENABLED
+                'false': PLUGIN_ADMIN.DISABLED
+    
+        event:
+          type: tab
+          title: Event
+          fields:
+            header.event.dt-section:
+              type: section
+              title: Date & Time
+              underline: true
+            header.event.start:
+              type: datetime
+              label: Start
+              help: Use the date selector to enter a start date and time for this event.
+              validate:
+                type: required
+            header.event.end:
+              type: datetime
+              label: End
+              help: Use the date selector to enter an end date and time for this event.
+              validate:
+                type: required
+            header.event.repeat:
+              type: text
+              label: Repeat
+              help: Using MTWRFSU to specify what days of the week this event repeats. For example, MWF. 
+              placeholder: MTWRFSU
+            header.event.freq:
+              type: select
+              label: Frequency
+              help: How often should this event repeat?
+              options:
+                '': "None"
+                'daily': 'Daily'
+                'weekly': 'Weekly'
+                'monthly': 'Monthly'
+                'yearly': 'Yearly'
+            header.event.until:
+              type: datetime
+              label: Until
+              help: How long should this event repeat? (3 months automatically if Repeat or Frequency are set)
+            header.event.exceptions-section:
+              type: section
+              title: Exceptions
+              underline: true
+            header.event.exceptions:
+              type: list
+              style: vertical
+              name: exceptions
+              label: Enter dates this repeating/reoccuring event will not meet.
+              fields:
+                .date:
+                  type: date
+                  label: Date
+            header.event.status-section:
+              type: section
+              underline: true
+              title: Status
+            header.event.status:
+              label: Status
+              type: select
+              options:
+                "": "None"
+                "scheduled": "scheduled"
+                "postponed": "postponed"
+                "cancelled": "cancelled"
+              title: Status
+              help: Possible values are scheduled, postponed, cancelled.
+            header.event.location-section:
+              type: section
+              title: Location
+              underline: true
+            header.event.venue:
+              type: text
+              label: Venue
+              help: Name of the venue hosting this event.
+            header.event.venue_link:
+              type: text
+              label: Venue URL
+              help: Enter the website URL to link the venue hosting the event.
+            header.event.address:
+              type: text
+              label: Address
+              help: Street address where the event will be located.
+            header.event.city:
+              type: text
+              label: City
+              help: City where the event will be located.
+            header.event.state:
+              type: text
+              label: State
+              help: State in which the event will be located.
+            header.event.zip:
+              type: text
+              label: Zip Code
+              help: Zip Code in which the event will be located.
+            header.event.location:
+              type: text
+              label: Location
+              help: Where is this event located? If you enter an address it will be geocoded below. 
+            header.event.coordinates:
+              type: text
+              label: Coordinates
+              placeholder: Latitude, Longitude
+              help: These are automatically generated from the location field.
+            header.event.country:
+              type: hidden
+            header.event.miscellaneous-section:
+              type: section
+              underline: true
+              label: Miscellaneous
+            header.event.cover:
+              type: text
+              label: Cover Charge
+              placeholder: 'Free'
+            header.event.facebook_link:
+              type: text
+              label: Facebook Link
+              help: Paste link to Facebook event here
+            header.event.age_restrictions:
+              type: select
+              label: Age Restriction
+              help: Enable if event entry is age restricted
+              default: 'All'
+              highlight: 'All'
+              options:
+                'All': 'All Ages'
+                '18': '18+'
+                '21': '21+'

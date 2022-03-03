@@ -1,0 +1,412 @@
+$event-locationpin-color:                       #898d94;
+$event-locationpin-dot-color:                   #50596c;
+
+@mixin location-pin($pin-color: $event-locationpin-color) {
+   span.location-pin {
+      width: .8em;
+      height: .8em;
+      border-radius: 50% 50% 50% 0;
+      background-color: $pin-color;
+      display: inline-block;
+      transform: rotate(-45deg);
+      margin: .2em .05em 0;
+      
+      &:after {
+         content: '';
+         width: .374em;
+         height: .374em;
+         margin: .214em 0 0 .214em;
+         background: $event-locationpin-dot-color;
+         position: absolute;
+         border-radius: 50%;
+      }
+   }
+   
+   a span.location-pin {
+      opacity: .75;
+   }
+}
+
+#event-hero {
+   background-color: $grey2;
+   --hero-clip: 0;
+   --hero-padding: 10rem 0 4rem;
+   > ._img {
+      z-index: 1;
+      img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+   }
+   > ._content {
+      @include container;
+      @include flexbox($direction: row, $justify: space-evenly, $align: center);
+      height: 100%;
+      margin-top: 1.5rem;
+      h2.__upcoming, 
+      h2.__next {
+         position: absolute;
+         top: 2%;
+         left: 20%;
+         opacity: 0.6;
+         font-weight: 600;
+         letter-spacing: 0.25vw;
+      }
+      > article {
+         @include col(7);
+         display: flex;
+         flex-direction: column;
+         align-items: flex-start;
+         justify-content: center;
+         position: relative;
+         z-index: 1;
+         padding-top: 2rem;
+         > .__meta {
+            position: relative;
+            right: -57%;
+            width: 18rem;
+            text-align: right;
+            opacity: 0.65;
+            i {
+               position: absolute;
+               top: 18px;
+               left: 120px;
+               font-size: 3.25rem;
+               z-index: 1;
+               color: #606060;
+               opacity: 0.25;
+               text-shadow: 0 2px 12px black;
+            }
+            > time {
+               position: relative;
+               z-index: 2;
+               font-size: 2.5rem;
+               font-weight: 600;
+               font-family: $michroma;
+               line-height: 0.5;
+               text-shadow: 0 0 6px #000, 0 0 40px rgba(200, 200, 200, 0.8);
+               > .__month-day {
+                  color: rgba($gray-300, 0.6);
+                  letter-spacing: 4px;
+               }
+               > .__year {
+                  display: block;
+                  font-size: 1.5rem;
+                  color: rgba($gray-700, 0.6);
+                  margin-top: 3px;
+                  margin-right: 15px;
+               }
+            }
+         }
+         > .__title {
+            position: relative;
+            margin-top: -5%;
+            > h1 {
+               font-size: 3.5vw;
+               font-weight: 600;
+               color: var(--c-accentContrasted);
+               > a {
+                  color: $grey-400;
+                  text-shadow: 0 2px 8px rgba($indigo, 0.4);
+                  &:hover {
+                     color: $grey-200;
+                  }
+               }
+            }
+         }
+         > .__details {
+            position: relative;
+            address {
+               font-style: normal;
+               @include row();
+               > .__event-map-pin {
+                  @include col(2);
+                  a {
+                     svg {
+                        fill: $red-300;
+                        stroke-width: 0;
+                        width: 100%;
+                        height: 100%;
+                     }
+                  }
+               }
+               > .__event--location {
+                  @include col(10);
+                  > .__event--venue {
+                     font-size: var(--text-l);
+                     font-style: normal;
+                     display: block;
+                     font-weight: 400;
+                  }
+                  > .__event--address {
+                     font-size: var(--text-m);
+                     font-style: italic;
+                     line-height: var(--lineHeightRelativeAmount);
+                     color: var(--c-accent);
+                     display: flex;
+                     max-width: 25ch;
+                  }
+               }
+               > .__event--date {
+                  @include font-size(24px);
+                  display: block;
+               }
+               
+            }
+            > .__extras {
+               margin-top: 1rem;
+               > .__event--time {
+                  @include font-size(20px);
+                  > .__start {
+                     color: $blue2;
+                     font-size: 135%;
+                     vertical-align: baseline;
+                  }
+                  > .__end {
+                     color: $blue4;
+                     font-size: 120%;
+                     vertical-align: baseline;
+                  }
+               }
+               > .__event--links {
+                  @include flexbox($justify: flex-start, $align: center, $gap: 1rem);
+                  > .__event--facebook {
+                     opacity: 0.8;
+                     max-width: 30px;
+                     svg {
+                        fill: $facebook;
+                        stroke: 0;
+                        margin: 0;
+                        padding: 0;
+                        width: 100%;
+                        height: 100%;
+                     }
+                     &:hover {
+                        opacity: 1;
+                     }
+                  }
+               }
+            }
+         }
+      }
+      > .__map {
+         @include col(5);
+         position: relative;
+         flex: 0 0 33%;
+         z-index: 1;  
+         > iframe {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4/3;
+         }
+      }
+   }
+}
+
+#events {
+   .event-listing {
+      padding-bottom: 2rem;
+      .event-article {
+         border-bottom: 1px solid #efefef;
+         margin-bottom: 0;
+         padding: 1rem 0;
+         .event-header {
+            @include row();
+            position: relative;
+         }
+         .event {
+            @include row();
+            .event-left-column {
+               @include col(4);
+               > .event-datetime {
+                  color: #555;
+                  display: block;
+                  margin: 0.5rem 1rem 0 0;
+                  text-align: right;
+                  .event-date {
+                     display: block;
+                     font-family: $prompt;
+                     font-size: $fontSize-h4;
+                     font-weight: 600;
+                     line-height: 1;
+                     margin: 0;
+                  }
+                  .event-day {
+                     display: block;
+                     font-family: $prompt;
+                     font-size: $fontSize-h5;
+                     font-weight: 400;
+                     line-height: 1;
+                     margin: 0;
+                  }
+                  .event-month {
+                     display: block;
+                     font-size: 1rem;
+                     font-weight: bold;
+                     line-height: 1;
+                     margin: 0.5rem 0;
+                     text-transform: uppercase;
+                  }
+                  .event-time {
+                     display: block;
+                     font-size: $fontSize-h6;
+                     font-family: $mitr;
+                     font-weight: 600;
+                     line-height: 1;
+                     margin-top: 0.25rem;
+                  }
+                  .event-year {
+                     display: none;
+                  }
+               }
+               > .event-location {
+                  margin-top: 1.5rem;
+                  > .__venue {
+                     font-size: $fontSize-h6;
+                  }
+                  > .__address {
+                     font-style: italic;
+                  }
+               }
+            }
+            .event-right-column {
+               @include col(8);
+               .event-title {
+                  margin: 0.3rem 0rem;
+               }
+               .event-location {
+                  margin: -.5rem 0 0.3rem ;
+                  @include location-pin;
+               }
+               .event-summary {
+                  * {
+                     display: inline;
+                  }
+               }
+               .event-categories {
+                  margin-top: 0.4rem;
+               }
+            }
+         }
+         .event-meta {
+            font-style: italic;
+         }
+      }
+   } 
+}
+
+#event {
+   @include row();
+   .event-listing {
+      @include col(7);   
+      .event-article {
+         border-bottom: 1px solid #efefef;
+         margin-bottom: 0;
+         padding: 0;
+         padding-bottom: 1rem;
+         
+         .event {
+            @include row();
+            .event-left-column {
+               @include col(3);
+            }
+            .event-right-column {
+               @include col(9);
+               display: flex;
+               flex-direction: column;
+               
+               .event-title {
+                  margin-top: 1rem;
+               }
+               
+               .event-location {
+                  margin-top: -.5rem;
+                  @include location-pin;
+               }
+               
+               .event-categories {
+                  margin-top: 0.5rem;
+                  order: -1; /* show categories at top */
+               }
+            }
+         }
+      }
+   }
+   
+   .events-sidebar {
+      @include col(5);
+      
+      .event-tags {
+         list-style: none;
+         margin: 0;
+         margin-bottom: 2rem;
+         padding: 0;
+         
+         li {
+            display: inline;
+         }
+      }
+   }
+}
+
+.events-sidebar {
+   h3 {
+      margin: 0;
+   }
+   
+   .events-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0;
+      
+      .event-day {
+         font-size: 1.2rem;
+         font-weight: bold;
+         padding-top: 1rem;
+         padding-bottom: 0.1rem;
+         display: block;
+         clear: both;
+         
+         &:first-child {
+            padding-top: 0;
+         }
+      }
+      
+      .event-item {
+         display: block;
+         margin-top: 0.1rem;
+         
+         time {
+            @include col(2);
+         }
+         
+         a {
+            @include col(10);
+         }
+         
+         @include location-pin(currentColor)
+      }
+   }
+}
+
+
+/* html5 .event-tags element */
+.event-tags {
+   display: inline-block;
+   
+   a {
+      border-radius: var(--radius-sm);
+      background: var(--grey-400);
+      color: $link;
+      display: inline-block;
+      padding: 0 0.5rem;
+      font-size: .75rem;
+      font-weight: normal;
+      text-transform: uppercase;
+      
+      &:visited {
+         color: var(--gray-800);
+      }
+   }
+}

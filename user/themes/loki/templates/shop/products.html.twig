@@ -1,0 +1,24 @@
+{% set name = p.title %}
+{% set price = p.header.price %}
+{% set description = p.content %}
+{% set sku = p.header.id %}
+{% set image = p.media.images|first %}
+
+<article class="product-listing">
+   <figure class="__image">
+      <img src="{{ image.url }}" alt="{{ name }}">
+   </figure>
+   <div class="product">
+      <div class="__title">
+         <h5><a href="{{ p.url }}">{{ name }}</a></h5>
+      </div>
+      <div class="__price">
+         <h4>${{ price }}</h4>
+      </div>
+      <div class="__info">
+         <p>{{ description|raw }}</p>
+         <a href="{{ page.url }}" class="read-more">Learn More</a>
+         <a href="#" class="add-to-cart">Add to Cart</a>
+      </div>
+   </div>
+</article>

@@ -1,0 +1,43 @@
+title: Gallery
+
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        inhalt:
+          type: tab
+          title: "Content"
+          fields:
+            content:
+              type: section
+              underline: true
+              fields:
+                header.title:
+                  type: text
+                  autofocus: true
+                  label: "Title"
+                
+            media:
+              type: section
+              title: "Page Media"
+              underline: true
+              fields:
+                header.gallery:
+                  type: pagemedia
+                  label: "Add Images"
+                  help: "Upload images you would like to appear in this category."
+
+                header.captions:
+                  type: toggle
+                  label: Image Captions
+                  highlight: 1
+                  default: 1
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED
+                  validate:
+                    type: bool

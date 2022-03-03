@@ -1,0 +1,20 @@
+{# Display taxonomy details #}
+{% if grav.theme.config.post.taxonomy %}
+   {% if page.taxonomy.category %}
+      <div class="__categories">
+         <i class="fas fa-cat"></i>
+         {% for category in page.taxonomy.category %}
+            <a href="{{ site.root.route }}{{ site.blog.route }}/category:{{ category }}">{{ category }}</a>{% if not loop.last %},{% endif %}
+         {% endfor %}
+      </div>
+   {% endif %}
+
+   {% if page.taxonomy.tag %}
+      <div class="__tags">
+         <i class="fas fa-hashtag"></i>
+         {% for tag in page.taxonomy.tag %}
+            <a href="{{ site.root.route }}{{ site.blog.route }}/tag:{{ tag }}">{{ tag }}</a>{% if not loop.last %},&nbsp;{% endif %}
+         {% endfor %}
+      </div>
+   {% endif %}
+{% endif %}

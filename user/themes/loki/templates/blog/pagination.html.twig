@@ -1,0 +1,14 @@
+{% if not page.isLast() %}
+   <div class="__prev">
+      <a class="paginate-link icon" href="{{ page.prevSibling().slug }}"><i class="fa fa-arrow-left"></i> <span class="left">Previous</span></a>
+   </div>
+   {% else %}
+      <div class="__prev"></div>
+{% endif %}
+{% if not page.isFirst() %}
+   <div class="__next">
+      <a class="__paginate-link icon" href="{{ page.nextSibling().slug }}"><span class="right">Next</span> <i class="fa fa-arrow-right"></i></a>
+   </div>
+   {% else %}
+      <div class="__next"></div>
+{% endif %}

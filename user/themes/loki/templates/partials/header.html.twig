@@ -1,0 +1,43 @@
+<header>
+   <div class="head-wrapper">
+      <div class="navbar">
+         <section id="slayley">
+            <i class="_icon"></i>
+            <a class="_title" href="{{ home_url|e }}">
+               {{ config.site.title|e }}
+            </a>
+            <span class="_subtitle">{{ config.site.subtitle|e }}</span>
+         </section>
+         <section>
+            {% block header_navigation %}
+               <nav class="page-menu">
+                  {% include 'partials/nav.html.twig' %}
+               </nav>
+            {% endblock %} 
+         </section>
+         {% block mobile_navigation %}
+            <div id="mobile-nav">
+               <div class="nav__toggle">
+                  <div>
+                     <span></span>
+                     <span></span>
+                     <span></span>
+                  </div>
+               </div>
+               <nav id="global-nav">
+                  {% include 'partials/nav.html.twig' %}
+               </nav>
+               <div id="nav-bg"></div>
+            </div>
+         {% endblock %}
+         
+         {% set user = grav.user %}
+         {% if user.authenticated and user.authorized %}
+            <div class="__login">
+               Welcome <strong>{{ user.fullname ?: user.username }}</strong>
+               <a class="button logout" href="{{ uri.addNonce(base_url_relative ~ uri.path ~ '/task' ~ config.system.param_sep ~ 'login.logout', 'logout-form', 'logout-nonce')|e }}">{{ 'PLUGIN_LOGIN.BTN_LOGOUT'|t }}</a>
+            </div>
+         {% endif %}
+      </div>
+   </div>
+</header>

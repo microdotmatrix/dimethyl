@@ -1,0 +1,64 @@
+img {
+   display: block;
+   max-width: 100%;
+   height: auto;
+   position: relative;
+   margin: 0 auto;
+   padding: 0;
+   display: block;
+   font-family: $kanit;
+   font-weight: 300;
+   font-size: 9px;
+   line-height: 2;
+   text-align: center;
+   &.fit-cover {
+      object-fit: cover;
+   }
+   &.fit-contain {
+      object-fit: contain;
+   }
+   &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $gray-600;
+      opacity: 0.5;
+      z-index: 1;
+   }
+   
+   &::after {
+      //content: "(url: " attr(src) ")";
+      content: "</?> :(";
+      display: block;
+      z-index: 2;
+      font-size: 11px;
+      font-weight: 600;
+   }
+}
+
+figure {
+   overflow: hidden;
+   position: relative;
+   margin: 0;
+   padding: 0;
+   figcaption {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 1rem;
+      background-color: rgba($gray-900, 0.5);
+      color: #fff;
+      opacity: 1;
+      transition: all 0.4 ease;
+   }
+}
+
+.grayscale {
+   filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+   filter: gray;
+   filter: grayscale(100%);
+}

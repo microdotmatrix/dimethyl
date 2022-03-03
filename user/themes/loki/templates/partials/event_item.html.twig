@@ -1,0 +1,88 @@
+<article class="event-article">
+    <header class="event-header">
+    {% set image = page.media.images|first %}
+    {% if image != null %}
+        {{ image.cropZoom(960,280).html|raw }}
+    {% endif %}
+    </header>
+
+    <section class="event">
+        <div class="event-left-column">
+         {% if single == true %} {# individual content page #}
+            <time class="event-datetime" datetime="{{ page.date|date("c") }}">
+               <span class="event-date">{{ page.header.event.start|dateTranslate(config.plugins.events.event_item.month)|raw }} {{ page.header.event.start|dateTranslate(config.plugins.events.event_item.day)|raw }}</span>
+               <span class="event-time">
+                  {% set end = "" %}
+                  {% if page.header.event.end %}
+                     {% set end = " - " ~ page.header.event.end|dateTranslate(config.plugins.events.event_item.time)|raw %}
+                  {% endif %}
+                  {{ page.header.event.start|dateTranslate(config.plugins.events.event_item.time) ~ end|raw }}
+               </span>
+            </time>
+            <div class="event-location">
+               {% if page.header.event.venue_link %}
+                  <a href="{{ page.header.event.venue_link|raw }}" class="__venue">{{ page.header.event.venue|raw }}</a>
+                  {% else %}
+                     <span class="__venue">{{ page.header.event.venue|raw }}</span>
+               {% endif %}
+               <div class="__address">{{ page.header.event.address|raw }}</div>
+               <div class="__address">{{ page.header.event.city|raw }}, {{ page.header.event.state|raw }} {{ page.header.event.zip|raw }}</div>
+            </div>
+
+        {% else %} {# main listing page #}
+            <time class="event-datetime" datetime="{{ page.date|date("c") }}">
+               <span class="event-day">{{ page.header.event.start|dateTranslate(config.plugins.events.event_item.day)|raw }}</span>
+               <span class="event-month">{{ page.header.event.start|dateTranslate(config.plugins.events.event_item.month)|raw }}</span>
+               <span class="event-time">
+                  {{ page.header.event.start|dateTranslate(config.plugins.events.event_item.time)|raw }} - {{ page.header.event.end|dateTranslate(config.plugins.events.event_item.time)|raw }}
+               </span>
+               <span class="event-year">{{ page.header.event.start|date("Y")|raw }}</span>
+            </time>
+        {% endif %}
+        </div>
+
+        <div class="event-right-column">
+        {% if single == true %} {# individual content page #}
+            <h2 class="event-title">{{ page.title }}</h2>
+            {% if (config.plugins.events.event_meta.display_location) and (page.header.event.location|raw is not empty) %}
+            <h3 class="event-venue">
+               {% if page.header.event.venue_link %}
+                  <a href="{{ page.header.event.venue_link|raw }}" target="_blank">{{ page.header.event.venue|raw }}</a>
+               {% else %}
+                  {{ page.header.event.venue|raw }}
+               {% endif %}
+            </h3>
+            <h3 class="event-location"><span class="location-pin"></span>{{ page.header.event.location|raw }}</h3>
+            {% endif %}
+            <div class="event-content">{{ page.content|raw }}</div>
+            {% include 'partials/event_meta.html.twig' with { 'page': page } %}
+
+        {% else %} {# main listing page #}
+            <h2 class="event-title"><a href="{{ page.url }}">{{ page.title }}</a></h2>
+            {% if (config.plugins.events.event_meta.display_location) and (page.header.event.location is not empty) %}
+            <h3 class="event-venue">
+               {% if page.header.event.venue_link %}
+                  <a href="{{ page.header.event.venue_link|raw }}" target="_blank">{{ page.header.event.venue|raw }}</a>
+               {% else %}
+                  {{ page.header.event.venue|raw }}
+               {% endif %}
+            </h3>
+            <h3 class="event-location"><span class="location-pin"></span>{{ page.header.event.location|raw }}</h3>
+            {% endif %}
+            <div class="event-summary">{{ page.summary(300)|raw }}
+                <span class="read-more"><a href="{{ page.url }}">{{ "PLUGIN_EVENTS.EVENTS.READ_MORE"|t }}</a></span>
+            </div>
+        {% endif %}
+
+        {% if page.taxonomy.category and config.plugins.events.event_sidebar.enable_categories %}
+            <div class="event-categories">
+                <span class="event-tags">
+                {% for category in page.taxonomy.category %}
+                    <a href="{{ event.url|rtrim('/') }}/category{{ config.system.param_sep }}{{ category }}">{{ category }}</a>
+                {% endfor %}
+                </span>
+            </div>
+        {% endif %}
+        </div>
+    </section>
+</article>

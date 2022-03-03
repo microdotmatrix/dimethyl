@@ -1,0 +1,22 @@
+{% extends "partials/base.html.twig" %}
+
+{% block content %}
+
+<main id="gallery">
+<!-- Portfolio -->
+   {% block portfolio %}  
+      <section>   
+         <div class="row">
+            {% for item in page.header.images %} 
+               <div class="{{columns}} portfolio_item">
+                     <a href="{{page.media[item.image].url}}" class="glightbox" data-width="100vw" data-zoomable="true" data-glightbox='title: {{item.title}}; description: {{item.description|raw}}'>
+                        <span class="image fit"><img src="{{page.media[item.thumb].url}}" alt="image" /></span>
+                     </a>
+               </div>
+            {% endfor %}
+         </div>
+      </section>
+   {% endblock %}
+</main>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% set author_id = page.header.post_author %}
+{% set author = theme_config.slayley %}
+{% set social = theme_config.slayley.social %}
+{% set icons = [
+   'twitch',
+   'facebook',
+   'instagram',
+   'reddit',
+   'snapchat',
+] %}
+<div class="_author">
+   <div class="_icon">
+      {% if author.image %}
+         <figure class="_avatar">
+            <img src="{{ author.image }}" alt="{{ author.name }}" class="author">
+         </figure>
+      {% endif %}
+    </div>
+    <div class="_info">
+      <span>Posted by</span>
+      <div class="_name">
+         <a href="mailto:{{ author.email }}" target="_blank">{% if author_id %}{{ author_id }}{% else %}{{ author.username }}{% endif %}</a>
+      </div>
+      <div class="_social">
+         <ul class="_links">
+            {% for type, meta in social %}
+            <li>
+               <a href="{{ meta.url }}" {% if meta.rel %}rel="{{ meta.rel }}" target="_blank" {% endif %}class="btn btn-link" title="{{ meta.title }}">
+                  <i class="fab fa-{{ meta.icon }}"></i>
+               </a>
+            </li>
+            {% endfor %}
+         </ul>
+      </div>
+   </div>
+</div>

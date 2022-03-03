@@ -1,0 +1,16 @@
+form:
+  fields:
+
+    hero_title:
+      type: spacer
+      title: Hero Section
+
+    header.hero_image:
+      type: filepicker
+      label: Hero Image
+      preview_images: true
+      description: 'If not specified, this defaults to the first image found in the page''s folder'
+
+    toggles_title:
+      type: spacer
+      title: Configuration

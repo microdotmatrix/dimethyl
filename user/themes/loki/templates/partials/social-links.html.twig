@@ -1,0 +1,7 @@
+{% for type, meta in theme_config.slayley.social %}
+   <div class="__social">
+      <a href="{{ meta.url }}" {% if meta.rel %}rel="{{ meta.rel }}" {% endif %}class="btn" title="{{ meta.title }}" target="_blank">
+         <i class="fab fa-{{ meta.icon }}"></i>
+      </a>
+   </div>
+{% endfor %}

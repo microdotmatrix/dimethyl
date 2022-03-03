@@ -1,0 +1,62 @@
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+
+        portfolio:
+          type: tab
+          title: Image Portfolio
+
+          fields:
+
+            content_title:
+              type: spacer
+              title: Portfolio
+
+            header.media:
+              type: pagemedia
+              label: Upload Images Here
+
+            header.class:
+              type: select
+              label: Layout
+              default: standard
+              size: medium
+              options:
+                medium: two-cols
+                standard: three-cols
+                
+            header.images:
+              type: list
+              style: vertical
+              label: Images
+              collapsed: true
+              fields:
+                .image:
+                   type: pagemediaselect
+                   label: Select Image
+                   preview_images: true
+                   accept:
+                    - .png
+                    - .jpg
+                    - .gif
+                    - .svg
+                .title:
+                   type: text
+                   label: Image Title
+                .description:
+                   type: text
+                   label: Image Description
+                .thumb:
+                   type: filepicker
+                   folder: 'self@'
+                   label: Thumbnail
+                   preview_images: true
+                   accept:
+                    - .png
+                    - .jpg
+                    - .gif
+                    - .svg

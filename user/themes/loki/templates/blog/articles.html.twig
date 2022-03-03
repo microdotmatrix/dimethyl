@@ -1,0 +1,35 @@
+<article class="post-listing loadAnim">
+   <section class="__post-img">
+      {% set post_img = p.media.images|first %}
+      <a href="{{ p.url }}">
+         <figure class="jarallax" data-speed="0.8">
+            {% if post_img %}
+               <img src="{{ post_img.url }}" alt="{{ p.title }}" class="jarallax-img">
+            {% else %}
+               <img src="{{ url('theme://images/slayshank-250.png') }}" alt="{{ p.title }}" class="jarallax-img">
+            {% endif %}
+            <figcaption class="post-date">
+               <i class="fa fa-calendar"></i>
+               <time class="dt-published" datetime="{{ p.date|date("c") }}">
+                  <span class="__month-day">{{ p.date|date("M d") }}</span>
+                  <span class="__year">{{ p.date|date("Y") }}</span>
+               </time>
+            </figcaption>
+         </figure>
+      </a>
+   </section>
+   <section class="__post-info">
+      <div class="post-title">
+         <h6><a href="{{ p.url }}">{{ p.title }}</a></h6>
+      </div>
+      
+      <div class="post-summary">
+         {% if p.summary != p.content %}
+            {{ p.summary|truncate(160)|raw }}
+            <a href="{{ p.url }}" class="__read-more"><span>Read More...</span> <i class="svg __more"></i></a>
+         {% else %}
+            {{ p.content|raw }}
+         {% endif %}
+      </div>
+   </section>
+</article>

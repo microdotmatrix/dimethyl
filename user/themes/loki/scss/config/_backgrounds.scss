@@ -1,0 +1,109 @@
+// Striped
+@mixin striped($color: rgba(255, 255, 255, .2), $angle: 45deg) {
+   background-image: -webkit-linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
+   background-image: -o-linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
+   background-image: linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
+}
+
+// Stolen Bootstrap Gradients
+
+// Gradients
+
+// scss-docs-start gradient-bg-mixin
+@mixin gradient-bg($color: null) {
+   background-color: $color;
+   
+   @if $enable-gradients {
+      background-image: var(--#{$variable-prefix}gradient);
+   }
+}
+// scss-docs-end gradient-bg-mixin
+
+// scss-docs-start gradient-mixins
+// Horizontal gradient, from left to right
+//
+// Creates two color stops, start and end, by specifying a color and position for each color stop.
+@mixin gradient-x($start-color: $gray-700, $end-color: $gray-800, $start-percent: 0%, $end-percent: 100%) {
+   background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent);
+}
+
+// Vertical gradient, from top to bottom
+//
+// Creates two color stops, start and end, by specifying a color and position for each color stop.
+@mixin gradient-y($start-color: $gray-700, $end-color: $gray-800, $start-percent: null, $end-percent: null) {
+   background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent);
+}
+
+@mixin gradient-directional($start-color: $gray-700, $end-color: $gray-800, $deg: 45deg) {
+   background-image: linear-gradient($deg, $start-color, $end-color);
+}
+
+@mixin gradient-x-three-colors($start-color: $blue, $mid-color: $purple, $color-stop: 50%, $end-color: $red) {
+   background-image: linear-gradient(to right, $start-color, $mid-color $color-stop, $end-color);
+}
+
+@mixin gradient-y-three-colors($start-color: $blue, $mid-color: $purple, $color-stop: 50%, $end-color: $red) {
+   background-image: linear-gradient($start-color, $mid-color $color-stop, $end-color);
+}
+
+@mixin gradient-radial($inner-color: $gray-700, $outer-color: $gray-800) {
+   background-image: radial-gradient(circle, $inner-color, $outer-color);
+}
+
+@mixin gradient-striped($color: rgba($white, .15), $angle: 45deg) {
+   background-image: linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
+}
+
+@mixin bg-light($opacity: 0.4) {
+   background: rgba(#fff, 0.4);
+}
+
+@mixin light-gradient($direction) {
+   background: linear-gradient(to $direction, 
+   rgba(#fff, 0.9) 100%,
+   rgba(#fff,0.5) 66%, 
+   rgba(#fff,0.2) 33%,
+   rgba(#fff, 0) 0%);
+}
+
+@mixin bg-dark($opacity: 0.4) {
+   background: rgba(#000, 0.4);
+}
+
+@mixin dark-gradient($direction) {
+   background: linear-gradient(to $direction, 
+      rgba($black, 0.0) 0%, 
+      rgba($black, 0.15) 25%, 
+      rgba($black, 0.40) 50%,
+      rgba($black, 0.75) 75%, 
+      rgba($black, 1) 100%);
+}
+
+@mixin radial-green {
+   background: radial-gradient(circle, 
+      rgba(255,255,255,0) 0%, 
+      rgba(177,251,69,0.16008401651676296) 6%, 
+      rgba(180,226,119,0.4121848568528974) 13%, 
+      rgba(68,96,27,0.6922969016708246) 30%, 
+      rgba(35,54,8,0.8575630081134016) 51%, 
+      rgba(10,18,0,1) 85%);
+}
+
+@mixin radial-blue {
+   background: radial-gradient(circle, 
+      rgba(198, 255, 255, 0.2) 0%, 
+      rgba(69, 244, 251, 0.2) 0%, 
+      rgba(119, 202, 226, .35) 35%, 
+      rgba(27, 69, 96, .5) 50%, 
+      rgba(8, 10, 54, .8) 80%, 
+      rgba(0, 3, 18, 1) 100%);
+}
+
+@mixin radial-red {
+   background: radial-gradient(circle, 
+      rgba(255,255,255,0) 0%, 
+      rgba(209,37,11,0.2777485994397759) 25%, 
+      rgba(125,17,0,0.6166841736694677) 49%, 
+      rgba(79,28,18,0.804359243697479) 74%, 
+      rgba(24,1,1,1) 100%);
+}

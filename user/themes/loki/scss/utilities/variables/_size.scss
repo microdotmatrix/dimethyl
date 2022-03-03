@@ -1,0 +1,45 @@
+// Page Structuring & Breakpoints
+
+$content-width:            1280px !default;
+
+$xs:                       32rem !default; // 512px
+$sm:                       48rem !default; // 768px
+$md:                       64rem !default; // 1024px
+$lg:                       80rem !default; // 1280px
+$xl:                       90rem !default; // 1440px
+
+$size-xs:                  480px !default;
+$size-sm:                  600px !default;
+$size-md:                  840px !default;
+$size-lg:                  960px !default;
+$size-xl:                  1280px !default;
+$size-2x:                  1440px !default;
+
+
+// Text Sizing
+$fontSize-html:            112.5%;
+$lineHeight-html:          1;
+
+$fontSize-p:               clamp(0.96rem, calc( 8px + 1vw ), 1.084rem);
+$fontSize-p--mobile:       0.808rem;
+$fontSize-p--tablet:       clamp(0.808rem, calc( 8px + 1vw ), 0.969rem);
+
+$fontSize-h1:              clamp(3rem, calc( 8px + 6.66vw ), 6.66rem);
+$fontSize-h2:              clamp(2.5rem, calc( 8px + 5.55vw ), 5.55rem);
+$fontSize-h3:              clamp(2rem, calc( 8px + 4.44vw ), 4.44rem);
+$fontSize-h4:              clamp(1.5rem, calc( 8px + 3.33vw ), 3.33rem);
+$fontSize-h5:              clamp(1.25rem, calc( 8px + 2.22vw ), 2.22rem);
+$fontSize-h6:              clamp(1.125rem, calc( 8px + 1.55vw ), 1.55rem);
+$fontSize-small:           0.808rem;
+$fontSize-large:           clamp(1.163rem, calc( 8px + 1.242vw ), 1.242rem);
+
+$fontSize-title:           clamp(1.5rem, calc( 8px + 2vw ), 2rem);
+$fontSize-subtitle:        clamp(0.666rem, calc( 8px + 0.808vw), 0.808rem);
+$navLink-size:             clamp(0.96rem, calc( 4px + 1.084vw ), 1.084rem);
+
+
+// Spacing Units
+
+$spacing-unit:             1.24rem * 1.618 !default;
+$spacing-unit-2x:          $spacing-unit * 2;
+$spacing-unit-2x-px:       32.101px;

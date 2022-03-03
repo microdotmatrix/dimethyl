@@ -1,0 +1,15 @@
+{% set shop_cat_img = cats.media.images|first %}
+
+<article class="store__category">
+   <figure class="__cat-image">
+      <img src="{{ shop_cat_img.url }}" alt="{{ cats.title }}">
+      <figcaption>
+         <section class="__cat-title">
+            <h2><a href="{{ cats.url }}">{{ cats.title }}</a></h2>
+         </section>
+         <section class="__cat-description">
+            <p>{{ cats.summary|raw }}</p>
+         </section>
+      </figcaption>
+   </figure>
+</article>
