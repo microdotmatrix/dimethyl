@@ -1,0 +1,39 @@
+enabled: true
+date_format:
+  translate: true
+  long: 'Y-m-d h:ia'
+  medium: m/d/Y
+  short: 'M j'
+  default: 'F j, Y h:ia'
+filter_combinator: and
+taxonomy_type: event
+event_template_types: 'calendar, events, event'
+display_months_out: 6
+show_past_events: false
+enable_single_event_filter: true
+default_events_page: events
+events_subpage: /events
+icalendar_folder: /ical
+icalendars: null
+enable_geocoding: false
+api_key: none
+calendar:
+  first_dow: '6'
+  day_char: 3
+  header: 'F Y'
+  anchor_title: 'l, F j, Y'
+  details:
+    title: 'l, F j'
+    time: 'g:ia'
+event_item:
+  date: 'F j, Y'
+  day: d
+  month: M
+  time: 'g:ia'
+event_meta:
+  until: 'F j, Y'
+  display_location: false
+event_sidebar:
+  enable_categories: false
+  header: 'l, F j'
+  time: 'g:ia'

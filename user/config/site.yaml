@@ -1,0 +1,21 @@
+title: Slayley
+subtitle: Art, Gaming, Fitness, Apparel
+theme: loki
+author:
+  name: Slayley
+  email: 'therealjohnpolinski@gmail.com'
+metadata:
+  description: 'Modern Art and Content Creation by Slayley'
+  keywords: 'accessories, apparel, art, fine art, fitness, hayley, slayley, video games'
+summary:
+  enabled: true
+  format: short
+  size: 420
+  delimiter: '==='
+redirects: null
+routes: null
+blog:
+  route: /articles
+taxonomies:
+  - category
+  - tag

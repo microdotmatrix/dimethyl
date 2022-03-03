@@ -1,0 +1,43 @@
+enabled: true
+
+post:
+  navigation: true
+  taxonomy: true
+
+slayley:
+  name: Hayley Garcia
+  username: Slayley
+  url: https://slayley.com
+  image: /dmt/user/accounts/avatars/hot9kallrwqoxse.jpg
+  email: ggslayley@gmail.com
+  social:
+    facebook:
+      title: Facebook
+      url: https://facebook.com/hayley.garcia
+      icon: facebook
+      rel: social-facebook
+    twitter:
+      title: Twitter
+      url: https://twitter.com/ggSlayley
+      icon: twitter
+      rel: social-twitter
+    instagram:
+      title: Instagram
+      url: https://instagram.com/slayleyart
+      icon: instagram
+      rel: social-instagram
+    reddit:
+      title: Reddit
+      url: https://reddit.com/u/purplehayzz
+      icon: reddit
+      rel: social-reddit
+    twitch:
+      title: Twitch
+      url: https://twitch.tv/ggSlayley
+      icon: twitch
+      rel: social-twitch
+    discord:
+      title: Discord
+      url: https://discord.com/users/493920834008907776
+      icon: discord
+      rel: social-discord

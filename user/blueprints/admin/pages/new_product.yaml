@@ -1,0 +1,31 @@
+form:
+  validation: loose
+  fields:
+    section:
+        type: section
+        title: Add Product
+
+    title:
+      type: text
+      label: Product Name
+      validate:
+        required: true
+
+    folder:
+      type: hidden
+      default: '@slugify-title'
+  
+    route:
+      type: hidden
+      default: /shop
+        
+    name:
+      type: hidden
+      default: 'product'
+
+    visible:
+      type: hidden
+      default: ''
+
+    blueprint:
+      type: blueprint
