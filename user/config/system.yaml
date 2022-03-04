@@ -147,7 +147,7 @@ assets:
   enable_asset_sri: false
   collections:
     jquery: 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'
-    gsap: 
+    gsap:
       - 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js'
       - 'https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js'
       - 'theme://js/plugins/imagesloaded.pkgd.min.js'
@@ -157,7 +157,6 @@ assets:
       - 'theme://js/plugins/jarallax/jarallax-video.min.js'
     lightbox: 'theme://js/plugins/glightbox.js'
     powermode: 'theme://js/plugins/activate-power-mode.js'
-
 errors:
   display: 1
   log: true
@@ -184,7 +183,7 @@ images:
     aspect_ratio: false
     retina_scale: '1'
   defaults:
-    loading: auto
+    loading: lazy
   watermark:
     image: 'system://images/watermark.png'
     position_y: center

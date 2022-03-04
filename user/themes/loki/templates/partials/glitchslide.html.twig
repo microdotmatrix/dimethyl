@@ -11,6 +11,11 @@
          <div id="gsap--slideImgIntro" class="slide__img glitch" style="background-image: url('{% if post_img %}{{ post_img.url }}{% else %}{{ slide_3.url }}{% endif %}');"></div>
          <div class="slide__text">
             <a href="{{ p.url }}" class="slide__title">{{ p.title }}</a>
+            <div class="slide__date">
+               <i class="svg __calendar"></i> 
+               <span class="month-day">{{ p.date|date('M d') }}</span>
+               <span class="year">{{ p.date|date('Y') }}</span>
+            </div>
             <div class="slide__description slide__event">
                <div class="__location"> 
                   <i class="svg __location-dot--red"></i> <a href="{{ p.header.event.venue_link }}">{{ p.header.event.venue }}</a> 
@@ -20,7 +25,7 @@
                </div>
                {{ p.content|truncate(190)|raw }}
                <div id="more">
-                  <a href="{{ p.url }}" class="__details">More Details</a>
+                  <a href="{{ p.url }}" class="__details"><span>More Details</span> <i class="svg __more"></i></a>
                </div>
             </div>
          </div>
@@ -30,14 +35,19 @@
    {% for p in page.find('/articles/news').children.order('date', 'desc').slice(0, 1) %}
       {% set post_img = p.media.images|first %}
       <div class="slide">
-         <div class="slide__img glitch" style="background-image: url('{% if post_img %}{{ post_img.url }}{% else %}{{ slide_5.url }}{% endif %}');"></div>
+         <div class="slide__img glitch" style="background-image: url('{% if post_img %}{{ post_img.url }}{% else %}{{ slide_4.url }}{% endif %}');"></div>
          <div class="slide__text">
             <a href="{{ p.url }}" class="slide__title">{{ p.title }}</a>
+            <div class="slide__date">
+               <i class="svg __calendar"></i> 
+               <span class="month-day">{{ p.date|date('M d') }}</span>
+               <span class="year">{{ p.date|date('Y') }}</span>
+            </div>
             <div class="slide__description">
                {{ p.summary|raw }}
-            </div>
-            <div id="more">
-               <a href="{{ p.url }}" class="__details">Read More</a>
+               <div id="more">
+                  <a href="{{ p.url }}" class="__details"><span>Read More</span> <i class="svg __more"></i></a>
+               </div>
             </div>
          </div>
       </div>
@@ -64,20 +74,28 @@
          </div>
       </div>
    </div>
-   <div class="slide">
-      <div class="slide__img glitch" style="background-image: url('{{ slide_4.url }}');"></div>
-      <div class="slide__text">
-         <h2 class="slide__title">Fine Quest</h2>
-         <p class="slide__description">You have nothing, nothing to threaten me with. Nothing to do with all your strength.</p>
+
+   {% for p in page.find('/articles/news').children.order('date', 'desc').slice(1, 2) %}
+      {% set post_img = p.media.images|first %}
+      <div class="slide">
+         <div class="slide__img glitch" style="background-image: url('{% if post_img %}{{ post_img.url }}{% else %}{{ slide_5.url }}{% endif %}');"></div>
+         <div class="slide__text">
+            <a href="{{ p.url }}" class="slide__title">{{ p.title }}</a>
+            <div class="slide__date">
+               <i class="svg __calendar"></i> 
+               <span class="month-day">{{ p.date|date('M d') }}</span>
+               <span class="year">{{ p.date|date('Y') }}</span>
+            </div>
+            <div class="slide__description">
+               {{ p.summary|raw }}
+               <div id="more">
+                  <a href="{{ p.url }}" class="__details"><span>Read More</span> <i class="svg __more"></i></a>
+               </div>
+            </div>
+         </div>
       </div>
-   </div>
-   <div class="slide">
-      <div class="slide__img glitch" style="background-image: url('{{ slide_5.url }}');"></div>
-      <div class="slide__text">
-         <h2 class="slide__title">Dome Being</h2>
-         <p class="slide__description">I'll be standing where l belong. Between you and the people of Gotham.</p>
-      </div>
-   </div>
+   {% endfor %}
+
 </div>
 <nav class="slide-nav">
    <button class="slide-nav__button prev"><span class="slide-nav__text prev">Previous</span></button>

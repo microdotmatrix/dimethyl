@@ -2,6 +2,33 @@
    padding-bottom: 3.5rem;
    clip-path: var(--hero-clip);
    overflow: hidden;
+   .slide__date {
+      position: absolute;
+      top: -3.666rem;
+      left: 0;
+      text-align: right;
+      display: block;
+      width: 69%;
+      > .svg {
+         @include size(2rem);
+         top: 9px;
+      }
+      > span {
+         font-family: $michroma;
+         font-weight: 600;
+      }
+      > .month-day {
+         font-size: $fontSize-h6;
+         color: ocGray(3);
+      }
+      > .year {
+         font-size: $fontSize-p;
+         color: ocGray(6);
+         display: block;
+         margin-right: 12px;
+         margin-top: -6px;
+      }
+   }
    .slide__event {
       .__location {
          font-size: $fontSize-h5;
@@ -93,10 +120,35 @@
       position: relative;
       margin-top: 2.5rem;
       z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
       .__details {
-         @include btn-minimal($fontSize-small);
+         font-size: $fontSize-small;
+         font-weight: 300;
          color: ocTeal(2);
-         background-color: rgba(ocGray(2), 0.2);
+         display: flex;
+         align-items: center;
+         position: relative;
+         z-index: 2;
+         > .svg {
+            @include size(1.5rem);
+            position: relative;
+            z-index: 1;
+         }
+         > span {
+            position: relative;
+            z-index: 2;
+            padding-right: 1.5rem;
+            margin-right: -1rem;
+            opacity: 0;
+            transform: translateX(12px);
+            transition: all 400ms ease(in-out-quad);
+            &:hover {
+               opacity: 1;
+               transform: translateX(0);
+            }
+         }
       }
       @include breakpoint(max, $md) {
          text-align: center;

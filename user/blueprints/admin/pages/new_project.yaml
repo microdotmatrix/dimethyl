@@ -3,7 +3,7 @@ form:
   fields:
     section:
         type: section
-        title: Add News Post
+        title: Add Project Post
 
     title:
       type: text
@@ -17,7 +17,7 @@ form:
   
     route:
       type: hidden
-      default: /articles/news
+      default: /articles/projects
         
     name:
       type: hidden

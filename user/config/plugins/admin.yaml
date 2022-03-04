@@ -102,10 +102,18 @@ pagemedia:
   resize_quality: 0.8
 add_modals:
   -
-    label: Add Post
+    label: News Post
     blueprint: admin/pages/new_post
     show_in: bar
   -
-    label: Add Product
+    label: Project Post
+    blueprint: admin/pages/new_project
+    show_in: bar
+  -
+    label: Event
+    blueprint: admin/pages/new_event
+    show_in: bar
+  -
+    label: Product
     blueprint: admin/pages/new_product
     show_in: bar

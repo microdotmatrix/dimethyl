@@ -121,18 +121,19 @@ $glitch-Hx--mobile: clamp(1.420rem, calc( 8px + 1.808vw ), 1.808rem);
 	max-width: 69%;
 	color: $gray-200;
    @include reset-headings;
-   p {
-      color: $gray-200;
+   h1, h2, h3, h4, h5, h6 {
+      color: ocGray(2);
    }
-}
-
-.slide__description a {
-	color: $link;
-	pointer-events: auto;
-}
-
-.slide__description a:hover {
-	color: #fff;
+   p {
+      color: $gray-400;
+   }
+   a {
+      color: $link;
+      pointer-events: auto;
+      &:hover {
+         color: #fff;
+      }
+   }
 }
 
 .slide-nav {

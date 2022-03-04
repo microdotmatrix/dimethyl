@@ -3,7 +3,7 @@ form:
   fields:
     section:
         type: section
-        title: Add News Post
+        title: Add Event Post
 
     title:
       type: text
@@ -17,11 +17,11 @@ form:
   
     route:
       type: hidden
-      default: /articles/news
+      default: /articles/events
         
     name:
       type: hidden
-      default: 'post'
+      default: 'event'
 
     visible:
       type: hidden
