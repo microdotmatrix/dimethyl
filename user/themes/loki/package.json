@@ -15,6 +15,7 @@
    "dependencies": {
       "@barba/core": "^2.9.7",
       "basicscroll": "^3.0.4",
+      "flexiblegs-scss": "^5.6.0",
       "glightbox": "^3.1.0",
       "nanogallery2": "^3.0.5",
       "open-color": "^1.9.1",

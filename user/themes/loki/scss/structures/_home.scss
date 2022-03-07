@@ -164,8 +164,13 @@
    gap: 0 3rem;
    > section {
       @include row();
+      margin-top: $spacing-unit;
+      margin-bottom: $spacing-unit;
       @include breakpoint(max, $md) {
          flex-direction: column;
+      }
+      @include only(1) {
+         margin-top: 0;
       }
       > article {
          @include col();
@@ -268,7 +273,6 @@
                      width: 100%;
                      height: 100%;
                      opacity: 1;
-                     // background: ocGray(8);
                      transform: translateY(0);
                      backdrop-filter: blur(2px);
                      > span {
