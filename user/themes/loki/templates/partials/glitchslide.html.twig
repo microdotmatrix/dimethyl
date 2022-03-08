@@ -9,16 +9,19 @@
       {% set post_img = p.media.images|first %}
       <div class="slide slide--current">
          <div id="gsap--slideImgIntro" class="slide__img glitch" style="background-image: url('{% if post_img %}{{ post_img.url }}{% else %}{{ slide_3.url }}{% endif %}');"></div>
+			<div id="upcoming-events" class="slide__intro">
+				<h3>Upcoming Events...</h3>
+			</div>
          <div class="slide__text">
             <a href="{{ p.url }}" class="slide__title">{{ p.title }}</a>
             <div class="slide__date">
-               <i class="svg __calendar"></i> 
+               <i class="svg __calendar"></i>
                <span class="month-day">{{ p.date|date('M d') }}</span>
                <span class="year">{{ p.date|date('Y') }}</span>
             </div>
             <div class="slide__description slide__event">
-               <div class="__location"> 
-                  <i class="svg __location-dot--red"></i> <a href="{{ p.header.event.venue_link }}">{{ p.header.event.venue }}</a> 
+               <div class="__location">
+                  <i class="svg __location-dot--red"></i> <a href="{{ p.header.event.venue_link }}">{{ p.header.event.venue }}</a>
                </div>
                <div class="__date">
                   <i class="svg __calendar"></i> <span>{{ p.header.event.start }}</span>
@@ -39,7 +42,7 @@
          <div class="slide__text">
             <a href="{{ p.url }}" class="slide__title">{{ p.title }}</a>
             <div class="slide__date">
-               <i class="svg __calendar"></i> 
+               <i class="svg __calendar"></i>
                <span class="month-day">{{ p.date|date('M d') }}</span>
                <span class="year">{{ p.date|date('Y') }}</span>
             </div>
@@ -52,7 +55,7 @@
          </div>
       </div>
    {% endfor %}
-      
+
    <div class="slide">
       <div class="slide__img glitch" style="background-image: url('{{ slide_3.url }}');"></div>
       <div class="slide__text">
@@ -82,7 +85,7 @@
          <div class="slide__text">
             <a href="{{ p.url }}" class="slide__title">{{ p.title }}</a>
             <div class="slide__date">
-               <i class="svg __calendar"></i> 
+               <i class="svg __calendar"></i>
                <span class="month-day">{{ p.date|date('M d') }}</span>
                <span class="year">{{ p.date|date('Y') }}</span>
             </div>

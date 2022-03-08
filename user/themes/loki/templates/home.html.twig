@@ -9,7 +9,7 @@
    <header id="intro" class="home-slider">
       {% include "partials/glitchslide.html.twig" %}
    </header>
-   
+
    <main id="home-page">
       <section>
          <article class="__x66 loadAnim">
@@ -22,7 +22,7 @@
                   </div>
                   <div class="__content">{{ page.content|raw }}</div>
                </div>
-               
+
                <div class="__learn-more">
                   <figure class="avatar">
                      {% if page.header.avatar %}
@@ -46,14 +46,14 @@
             </div>
          </aside>
       </section>
-         
+
       {% set social_url = theme_config.slayley.social %}
-      
+
       <section>
          <article class="loadAnim">
             <div class="__content">
                <h4>Art & Design</h4>
-               
+
                {{ page.header.art_preview|raw }}
             </div>
 
@@ -64,9 +64,9 @@
                <div class="grid-item">{% include "modular/preview.html.twig" with {'art': page.find('/portfolio/_paintings')} %}</div>
                <div class="grid-item">{% include "modular/preview.html.twig" with {'art': page.find('/portfolio/_digital')} %}</div>
                <div class="grid-item">{% include "modular/preview.html.twig" with {'art': page.find('/portfolio/_uv')} %}</div>
-            </div>   
+            </div>
          </article>
-               
+
          <aside class="loadAnim">
             <div id="twitch-box" class="__streaming">
                <iframe src="https://player.twitch.tv/?video=875487345&parent=www.example.com" frameborder="0" allowfullscreen="true" scrolling="no" height="auto" width="100%" parent="https://slayley/"></iframe>
@@ -93,7 +93,7 @@
             </div>
          </aside>
       </section>
-      
+
       <section id="store">
          <article>
             <div class="__content loadAnim">
@@ -139,15 +139,15 @@
          }, 99000);
       });
 
-      var $grid = $('#art-preview').imagesLoaded( function() {
-         $grid.isotope({
-            itemSelector: '.grid-item',
-            percentPosition: true,
-            stagger: 40,
-            masonry: {
-               columnWidth: '.grid-sizer'
-            }
-         });
-      });
+      // var $grid = $('#art-preview').imagesLoaded( function() {
+      //    $grid.isotope({
+      //       itemSelector: '.grid-item',
+      //       percentPosition: true,
+      //       stagger: 40,
+      //       masonry: {
+      //          columnWidth: '.grid-sizer'
+      //       }
+      //    });
+      // });
    </script>
 {% endblock %}

@@ -208,7 +208,7 @@ $glitch-Hx--mobile: clamp(1.420rem, calc( 8px + 1.808vw ), 1.808rem);
       }
       &:hover {
          &::after {
-            color: lighten($link, 30%);   
+            color: lighten($link, 30%);
          }
          span {
             animation: glitch-anim-text 0.5s linear alternate 1 backwards;
@@ -305,6 +305,18 @@ $glitch-Hx--mobile: clamp(1.420rem, calc( 8px + 1.808vw ), 1.808rem);
          }
       }
    }
+}
+
+.slide__intro {
+    position: absolute;
+    left: 20%;
+    top: 45%;
+    display: flex;
+    align-items: center;
+    // opacity: 1;
+    // visibility: hidden;
+    // backface-visibility: hidden;
+    z-index: 1000;
 }
 
 .effect-1 {
@@ -404,7 +416,7 @@ $glitch-Hx--mobile: clamp(1.420rem, calc( 8px + 1.808vw ), 1.808rem);
 /* Animations */
 
 @keyframes glitch-anim-1 {
-	0%, 100% { 
+	0%, 100% {
 		opacity: 1;
 		transform: translate3d(var(--gap-horizontal),0,0) scale3d(-1,-1,1);
 		-webkit-clip-path: polygon(0 2%, 100% 2%, 100% 5%, 0 5%);
@@ -457,7 +469,7 @@ $glitch-Hx--mobile: clamp(1.420rem, calc( 8px + 1.808vw ), 1.808rem);
 }
 
 @keyframes glitch-anim-2 {
-	0%, 100% { 
+	0%, 100% {
 		opacity: 1;
 		transform: translate3d(calc(-1 * var(--gap-horizontal)),0,0);
 		-webkit-clip-path: polygon(0 25%, 100% 25%, 100% 30%, 0 30%);
@@ -526,7 +538,7 @@ $glitch-Hx--mobile: clamp(1.420rem, calc( 8px + 1.808vw ), 1.808rem);
 }
 
 @keyframes glitch-anim-3 {
-	0%, 100% { 
+	0%, 100% {
 		opacity: 1;
 		transform: translate3d(0, calc(-1 * var(--gap-vertical)), 0) scale3d(-1,-1,1);
 		-webkit-clip-path: polygon(0 1%, 100% 1%, 100% 3%, 0 3%);
@@ -607,7 +619,7 @@ $glitch-Hx--mobile: clamp(1.420rem, calc( 8px + 1.808vw ), 1.808rem);
 }
 
 @keyframes glitch-anim-text {
-	0%, 100% { 
+	0%, 100% {
 		transform: translate3d(2px, -2px, 0) scale3d(-1,-1,1);
 		-webkit-clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%);
 		clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%);
@@ -643,7 +655,7 @@ $glitch-Hx--mobile: clamp(1.420rem, calc( 8px + 1.808vw ), 1.808rem);
 }
 
 @keyframes glitch-anim-title {
-	0%, 100% { 
+	0%, 100% {
 		transform: translate3d(2px, -2px, 0);
 		-webkit-clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%);
 		clip-path: polygon(0 20%, 100% 20%, 100% 21%, 0 21%);
@@ -680,8 +692,8 @@ $glitch-Hx--mobile: clamp(1.420rem, calc( 8px + 1.808vw ), 1.808rem);
 
 /* Flash */
 @keyframes glitch-anim-flash {
-	0%, 5% { 
-		opacity: 0.2; 
+	0%, 5% {
+		opacity: 0.2;
 		transform: translate3d(var(--gap-horizontal), var(--gap-vertical), 0);
 	}
 	5.5%, 100% {

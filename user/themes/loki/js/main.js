@@ -1,14 +1,14 @@
 $(document).ready(function() {
-   
+
    $('.nav__toggle').click(function(){
       $(this).children('div').toggleClass('open');
       $('.mobile-nav').toggleClass('open');
    });
-   
+
    $('.nav__toggle').click(function(){
       $('#mobile-nav').toggleClass('open');
    });
-   
+
 });
 
 $('.navTrigger').click(function () {
@@ -16,7 +16,7 @@ $('.navTrigger').click(function () {
    console.log("Clicked menu");
    $("#mainListDiv").toggleClass("show_list");
    $("#mainListDiv").fadeIn();
-   
+
 });
 
 $(window).scroll(function() {
@@ -69,3 +69,13 @@ gsap.fromTo("#gsap--slideImgIntro", { scale: 1.1, opacity: 0 }, {
    delay: 1.5,
    ease: "sine"
 });
+
+var tl = gsap.timeline();
+tl.from(".slide__intro", {
+   duration: 1,
+   opacity: 1,
+   x: 0,
+   delay: 0.5,
+   ease: "sine"
+});
+
